@@ -1,8 +1,12 @@
-# Sample GitLab Project
+# Advent of Code 2021 challenge
 
-This sample project shows how a project in GitLab looks for demonstration purposes. It contains issues, merge requests and Markdown files in many branches,
-named and filled with lorem ipsum.
+This project is dedicated to store my solutions of the AoC-2021 challenge.
 
-You can look around to get an idea how to structure your project and, when done, you can safely delete this project.
-
-[Learn more about creating GitLab projects.](https://docs.gitlab.com/ee/gitlab-basics/create-project.html)
+Day1 pt1 - SONAR SWEEP 	- How many measurements are larger than the previous measurement?
+Day1 pt2 -
+Day2 pt1 -
+Day2 pt2 -
+Day3 pt1 -
+Day3 pt2 -
+Day4 pt1 -
+Day4 pt2 -
