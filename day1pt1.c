@@ -1,6 +1,6 @@
 /*
 	Task:		How many measurements are larger than the previous measurement?
-	Input file:	%CD\inputs\day1pt1.txt 	(contains 2000 lines of int values)
+	Input file:	%CD\inputs\day1.txt 	(contains 2000 lines of int values)
 	Solution: 	1548
 	Author:		Molnar Mate
 	Date:		2022.03.13.
@@ -21,7 +21,7 @@ int main()
 	int increments = 0;
 
 	// OPEN INPUT FILE
-	FILE *file = fopen("inputs\\day1pt1.txt", "r");
+	FILE *file = fopen("inputs\\day1.txt", "r");
 	if (file == 0)
 	{
 		printf("Could not find input file.\n");
@@ -31,8 +31,8 @@ int main()
 	//LOAD VALUES INTO BUFFER (LINE-BY-LINE)
 	while(fgets(line ,MAX_LINE_LENGTH, file))
 	{
-		fscanf(file, "%[^\n]", line);
-		values[value_index] = atoi(line);
+		fscanf(file, "%[^\n]", line);		//line -> str
+		values[value_index] = atoi(line);	//str  -> int
 		//printf("Value: %i\n", values[value_index]);
 		value_index++;
 	}
