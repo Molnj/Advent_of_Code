@@ -1,5 +1,7 @@
 /*
-	Task:		What do you get if you multiply your final horizontal position by your final depth? 
+	Task:		day2pt1, but now with aim
+				up and down modifies aim
+				forward still moves horizontally, but now changes vertically too based on current
 	Input file:	%CD\inputs\day2.txt
 	Solution: 	1451210346 (h-1909, v-760194, a-655)
 	Author:		Molnar Mate

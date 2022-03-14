@@ -1,5 +1,6 @@
 /*
-	Task:		Put input measurements into 3item sliding (by1) windows. How many windows' sum are greater than the preivous'?
+	Task:		day1ot1, but put input measurements into 3item sliding (by1) windows.
+				How many windows' sum are greater than the preivous'?
 	Input file:	%CD\inputs\day1.txt 	(contains 2000 lines of int values)
 	Solution: 	1589
 	Author:		Molnar Mate
@@ -18,7 +19,7 @@ int main()
 	char line[8];
 	int values[NUM_OF_INPUTS];
 	int value_index = 0;
-	int increments = 0;
+	
 
 	// OPEN INPUT FILE
 	FILE *file = fopen("inputs\\day1.txt", "r");
@@ -28,16 +29,19 @@ int main()
 		return 1;
 	}
 
+
 	//LOAD VALUES INTO BUFFER (LINE-BY-LINE)
-	while(fgets(line ,MAX_LINE_LENGTH, file))
+	while(fgets(line, MAX_LINE_LENGTH, file))
 	{
 		fscanf(file, "%[^\n]", line);		//line -> str
 		values[value_index] = atoi(line);	//str  -> int
 		//printf("Value: %i\n", values[value_index]);
 		value_index++;
 	}
+	
 
 	//CHECK IF SUM OF WINDOW INCREMENTED
+	int increments = 0;
 	for(int index = 1 ; index < NUM_OF_INPUTS-2 ; index++)
 	{
 		int recent_window = values[index] + values[index+1] +values[index+2];

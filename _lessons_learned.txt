@@ -1,4 +1,4 @@
-Lessions Learned - AOC-2021 [C]
+Lessons Learned - AOC-2021 [C]
 
 DAY-1:
 	* how to use a list of integers in a txt file as an input
@@ -10,7 +10,7 @@ DAY-2:
 	* char --> int:		char a = '4';	int ia = a - '0';
 	
 DAY-3:
-	*
+	* 0-9 chars can be converted by substracting '0' --> '3' - '0' = 51 - 48 = 3
 	
 DAY-4:
 	*

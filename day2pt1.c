@@ -1,5 +1,6 @@
 /*
-	Task:		What do you get if you multiply your final horizontal position by your final depth? 
+	Task:		Each input line has a direction (forward, up, down) and a distance (1-9)
+				Calculate final destination by multiplying final vertival and horizontal distance 
 	Input file:	%CD\inputs\day2.txt
 	Solution: 	1250395 (1909*655)
 	Author:		Molnar Mate
