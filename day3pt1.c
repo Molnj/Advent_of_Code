@@ -51,37 +51,24 @@ int main()
 		}
 		row_cnt++;
 	}
-	printf("\n");
+	fclose(file);
 
 
-	// LOOP THROUGH MATRIX COLUMNS
-	for(int x=0; x<NUM_OF_INPUTS; x++)
-	{
-		// LOOP THROUGH MATRIX ROWS
-		for(int y=0; y<NUM_OF_BITS; y++)
-		{
-			printf("%d", bitfield [x][y]);
-		}
-		printf("\n");
-	}
-
-
-	// LOOP THROUGH MATRIX COLUMNS
+	//COUNT 1s and 0s in each column, based on frequency fill x-th gamma and epsilon bit positions
 	for(int x=0; x<NUM_OF_BITS; x++)
 	{
 		int ones = 0;
 		int zeroes = 0;
 
-		// LOOP THROUGH MATRIX ROWS
+		//count 1s and 0s in column
 		for(int y=0; y<NUM_OF_INPUTS; y++)
 		{
-			//count 1s and 0s in column
 			if(bitfield [y][x] == 1) {ones++;}
 			else if(bitfield [y][x] == 0) {zeroes++;}
 		}
 
-		//fill n-th bit in gamma and epsilon
-		if(ones > zeroes)
+		//fill x-th bit in gamma and epsilon
+		if(ones >= zeroes)
 		{
 			gamma[x] = 1;
 			epsilon[x] = 0;
@@ -92,17 +79,14 @@ int main()
 			epsilon[x] = 1;
 		}
 	}
-	
-
-	fclose(file);
-
-
+	//print results (binary)
 	printf("\nGamma: ");
 	for(int n=0; n<12; n++) {printf("%d", gamma[n]);}
 	printf("\nEpsilon: ");
 	for(int n=0; n<12; n++) {printf("%d", epsilon[n]);}
 
 
+	//bin -> dec conversion
 	int i = 11;
 	for(int n=0; n<12; n++)
 	{
@@ -110,10 +94,12 @@ int main()
 		epsilon_dec += epsilon[n] * pow(2,i);
 		i--;
 	}
+	//print results (decimal)
 	printf("\nGamma: %d", gamma_dec);
 	printf("\nEpsilon: %d", epsilon_dec);
 
 
+	//solution
 	int solution = gamma_dec * epsilon_dec;
 	printf("\nSolution: %d", solution);
 
