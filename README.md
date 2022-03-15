@@ -6,4 +6,4 @@ This project is dedicated to store my solutions of the AoC-2021 challenge.
 	- Day1 - Process txt file - only numbers
 	- Day2 - Process txt file - each line containing both string and int information
 	- Day3 - Process 2D array, then remove certain rows in pt2
-	- Day4 -
+	- Day4 - Bingo game (marking multiple matrices -->  5×5×100 3D-matrix?)

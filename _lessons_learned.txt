@@ -14,7 +14,7 @@ DAY-3:
 	* removing the less frequent parts repeatedly can delete the last remaining option 
 	
 DAY-4:
-	*
+	* better way to handle txt input with C (txt -> char matirx)
 	
 DAY-5:
 	*
