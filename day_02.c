@@ -48,20 +48,40 @@ typedef struct
 } submarinePosition_t;
 
 
-bool read_input_into_instruction_list(char* filename, instruction_t* instructions)
+bool read_input_into_instruction_list(char* fileName, instruction_t* instructions);
+unsigned int measure_submarine_path(instruction_t* instruction_list, int partNo);
+
+
+int main()
+{	
+	instruction_t instruction_list[NUMBER_OF_LINES];
+	if (read_input_into_instruction_list(INPUT_FILE, instruction_list))
+	{
+        unsigned int result1 = measure_submarine_path(instruction_list, PT1);
+		unsigned int result2 = measure_submarine_path(instruction_list, PT2);
+		printf("RESULT1 = %u\n", result1);
+		printf("RESULT2 = %u\n", result2);
+	}
+	else {return 1;}
+
+	return 0;
+} 
+
+
+bool read_input_into_instruction_list(char* fileName, instruction_t* instructions)
 {
 	//OPEN INPUT FILE
-	FILE *pFile = fopen(INPUT_FILE, "r");
+	FILE *pFile = fopen(fileName, "r");
 	if (pFile == 0)
 	{
-		printf("Could not find input file: %s.\n", filename);
+		printf("Could not find input file: %s.\n", fileName);
 		return false;
 	}
     
 	//READ TXT LINE-BY-LINE
     char dir_str[16];
     int dist = 0;
-    int cnt = 0;
+    int idx = 0;
     while (!feof(pFile))
     {
         fscanf(pFile, "%s %d\n", dir_str, &dist);
@@ -72,10 +92,10 @@ bool read_input_into_instruction_list(char* filename, instruction_t* instruction
         else if	(strcmp(dir_str, "down") == 0)		{dir = DOWN;}
         else 										{printf("Unknown token: %s.\n", dir_str);}
 
-        instructions[cnt].direction = dir;
-        instructions[cnt].distance = dist;
-		//printf("%d %d \n", instructions[cnt].direction, instructions[cnt].distance);
-        cnt++;
+        instructions[idx].direction = dir;
+        instructions[idx].distance = dist;
+		//printf("%d %d \n", instructions[idx].direction, instructions[idx].distance);
+        idx++;
     }
 
     fclose(pFile);
@@ -134,19 +154,3 @@ unsigned int measure_submarine_path(instruction_t* instruction_list, int partNo)
     unsigned int result = position.horizontal * position.vertical;
     return result;
 }
-
-
-int main()
-{	
-	instruction_t instruction_list[NUMBER_OF_LINES];
-	if (read_input_into_instruction_list(INPUT_FILE, instruction_list))
-	{
-        unsigned int result1 = measure_submarine_path(instruction_list, PT1);
-		unsigned int result2 = measure_submarine_path(instruction_list, PT2);
-		printf("RESULT1 = %u\n", result1);
-		printf("RESULT2 = %u\n", result2);
-	}
-	else {return 1;}
-
-	return 0;
-} 

@@ -22,60 +22,86 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
 #define INPUT_FILE		"inputs\\day_03.txt"
-#define NUM_OF_BITS		12
-#define LENGTH_OF_LINES	1000
+#define NUMBER_OF_LINES	1000
+#define LENGTH_OF_LINES	12
+
+bool read_input_into_bit_matrix(char* fileName, int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES]);
+int compute_power_consumption(int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES]);
+int compute_oxygen_rating(int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES]);
+int compute_co2_rating(int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES]);
 
 
 int main()
 {	
-	int gamma_dec = 0;
-	int epsilon_dec = 0;
+	int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES];
+	if (read_input_into_bit_matrix(INPUT_FILE, bit_matrix))
+	{
+		int result1 = compute_power_consumption(bit_matrix);
+		int result2 = compute_oxygen_rating(bit_matrix) * compute_co2_rating(bit_matrix);
+		printf("\nRESULT1 = %d (power rating)", result1);
+		printf("\nRESULT2 = %d (life support rating)\n", result2);
+	}
+	else {return 1;}
 
-	int gamma[12];
-	int epsilon[12];
-	int bitfield [LENGTH_OF_LINES][NUM_OF_BITS];
+	return 0;
+}
 
 
+bool read_input_into_bit_matrix(char* fileName, int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES])
+{
 	// OPEN INPUT FILE
-	FILE *pFile = fopen(INPUT_FILE, "r");
+	FILE *pFile = fopen(fileName, "r");
 	if (pFile == 0)
 	{
-		printf("Could not find input file.\n");
-		return 1;
+		printf("Could not find input file: %s.\n", fileName);
+		return false;
 	}
-
 
 	// LOAD VALUES INTO "bitfield" MATRIX (line-by-line)
 	int row_cnt = 0;
-	char line[NUM_OF_BITS];
-	while(fgets(line, sizeof(line), pFile))
-	{
-		fscanf(pFile, "%[^\n]", line);		//read: line -> str
+	char line[LENGTH_OF_LINES];
+	int value = 0;
+    while (!feof(pFile))
+    {
+		fscanf(pFile, "%s\n", &line);
+		//printf("%s\n", line);
 		//read line char-by-char
 		for (int i=0; i<sizeof(line); i++)
 		{
 			int bit = line[i] - '0';		// (ASCII value of '0-9') - (ASCII value of '0' (=48))
-			if(bit==-48) {bit=0;}			// TODO - weird bug only in first line (in char-int conversion) (-48 instead of 0)
-			bitfield [row_cnt][i] = bit;
+			if(bit==-48) {bit=0;}
+			else if(bit==-47) {bit=1;}
+			bit_matrix [row_cnt][i] = bit;
 		}
 		row_cnt++;
 	}
 	fclose(pFile);
+	return true;
+}
 
+
+int compute_power_consumption(int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES])
+{
+	int gamma[12];
+	int epsilon[12];
+
+	int gamma_dec = 0;
+	int epsilon_dec = 0;
 
 	//COUNT 1s and 0s in each column, based on frequency fill x-th gamma and epsilon bit positions
-	for(int x=0; x<NUM_OF_BITS; x++)
+	for(int x=0; x<LENGTH_OF_LINES; x++)
 	{
 		int ones = 0;
 		int zeroes = 0;
 
 		//count 1s and 0s in column
-		for(int y=0; y<LENGTH_OF_LINES; y++)
+		for(int y=0; y<NUMBER_OF_LINES; y++)
 		{
-			if(bitfield [y][x] == 1) {ones++;}
-			else if(bitfield [y][x] == 0) {zeroes++;}
+			if(bit_matrix [y][x] == 1) {ones++;}
+			else if(bit_matrix [y][x] == 0) {zeroes++;}
 		}
 
 		//fill x-th bit in gamma and epsilon
@@ -90,12 +116,12 @@ int main()
 			epsilon[x] = 1;
 		}
 	}
+
 	//print results (binary)
 	printf("\nGamma: ");
 	for(int n=0; n<12; n++) {printf("%d", gamma[n]);}
 	printf("\nEpsilon: ");
 	for(int n=0; n<12; n++) {printf("%d", epsilon[n]);}
-
 
 	//bin -> dec conversion
 	int i = 11;
@@ -106,168 +132,147 @@ int main()
 		i--;
 	}
 	//print results (decimal)
-	printf("\nGamma: %d", gamma_dec);
-	printf("\nEpsilon: %d", epsilon_dec);
+	printf("\nGamma: %d\n", gamma_dec);
+	printf("Epsilon: %d\n", epsilon_dec);
 
 
 	//solution
-	int solution = gamma_dec * epsilon_dec;
-	printf("\nSolution: %d", solution);
-	return 0;
+	int solution1 = gamma_dec * epsilon_dec;
+	return solution1;
 }
 
 
-/*
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-
-#define INPUT_FILE		"inputs\\day3.txt"
-#define NUM_OF_BITS		12
-#define NUM_OF_INPUTS	1000
-
-
-int main()
-{	
-	int bitfield [NUM_OF_INPUTS][NUM_OF_BITS];
-
-	int bitfield_oxygen [NUM_OF_INPUTS][NUM_OF_BITS];
-	int bitfield_co2 [NUM_OF_INPUTS][NUM_OF_BITS];
-
-	int oxygen_b[NUM_OF_BITS];
-	int co2_b[NUM_OF_BITS];
-
+int compute_oxygen_rating(int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES])
+{
+	int oxygen_b[LENGTH_OF_LINES];
 	int oxygen_dec = 0;
-	int co2_dec = 0;
 
-
-	// OPEN INPUT FILE
-	FILE *pFile = fopen(INPUT_FILE, "r");
-	if (pFile == 0)
+	// COPY BIT_MATRIX INTO "OXIGEN" MATRIX
+	int bit_matrix_oxygen [NUMBER_OF_LINES][LENGTH_OF_LINES];
+	for(int row=0; row<NUMBER_OF_LINES; row++)
 	{
-		printf("Could not find input file.\n");
-		return 1;
-	}
-
-
-	// LOAD VALUES INTO "bitfield" MATRIX (line-by-line)
-	int row_cnt = 0;
-	char line[NUM_OF_BITS];
-	while(fgets(line, sizeof(line), pFile))
-	{
-		fscanf(pFile, "%[^\n]", line);		//read: line -> str
-		//read line char-by-char
-		for (int i=0; i<sizeof(line); i++)
+		for(int col=0; col<LENGTH_OF_LINES; col++)
 		{
-			//printf("%c", line[i]);
-			int bit = line[i] - '0';		// (ASCII value of '0-9') - (ASCII value of '0' (=48))
-			if(bit==-48) {bit=0;}			// TODO - weird bug only in first line (in char-int conversion) (-48 instead of 0)
-			bitfield [row_cnt][i] = bit;
-		}
-		row_cnt++;
-	}
-	fclose(pFile);
-
-
-	// COPY BITFIELD INTO "OXIGEN" AND "CO2" MATRICES
-	for(int row=0; row<NUM_OF_INPUTS; row++)
-	{
-		for(int col=0; col<NUM_OF_BITS; col++)
-		{
-			bitfield_oxygen [row][col] = bitfield [row][col];
-			bitfield_co2 [row][col] = bitfield [row][col];
+			bit_matrix_oxygen [row][col] = bit_matrix [row][col];
 		}
 	}
-
 
 	// OXYGEN - COUNT 1S AND 0S, THEN DELETE ROWS WITH LESS FREQUENT BITS AT X-TH BIT POSITION
-	for(int x=0; x<NUM_OF_BITS; x++)
+	for(int x=0; x<LENGTH_OF_LINES; x++)
 	{
 		int ones = 0;
 		int zeroes = 0;
 
 		//counting part
-		for(int y=0; y<NUM_OF_INPUTS; y++)
+		for(int y=0; y<NUMBER_OF_LINES; y++)
 		{
-			if(bitfield_oxygen [y][x] == 1) {ones++;}
-			else if(bitfield_oxygen [y][x] == 0) {zeroes++;}
+			if(bit_matrix_oxygen [y][x] == 1) {ones++;}
+			else if(bit_matrix_oxygen [y][x] == 0) {zeroes++;}
 		}
 
 		//"deleting" part (-1)
-		for(int row=0; row<NUM_OF_INPUTS; row++)
+		for(int row=0; row<NUMBER_OF_LINES; row++)
 		{
 			if(ones >= zeroes)
 			{
-				if(bitfield_oxygen [row][x] == 0)
+				if(bit_matrix_oxygen [row][x] == 0)
 				{
-					for(int col=0; col<NUM_OF_BITS; col++)
+					for(int col=0; col<LENGTH_OF_LINES; col++)
 					{
-						bitfield_oxygen [row][col] = -1;
+						bit_matrix_oxygen [row][col] = -1;
 					}
 				}
 			}
 			else
 			{
-				if(bitfield_oxygen [row][x] == 1)
+				if(bit_matrix_oxygen [row][x] == 1)
 				{
-					for(int col=0; col<NUM_OF_BITS; col++)
+					for(int col=0; col<LENGTH_OF_LINES; col++)
 					{
-						bitfield_oxygen [row][col] = -1;
+						bit_matrix_oxygen [row][col] = -1;
 					}
 				}
 			}
 		}
 	}
+
 	//find oxygen_b array in matrix
-	for(int row=0; row<NUM_OF_INPUTS; row++)
+	for(int row=0; row<NUMBER_OF_LINES; row++)
 	{
-		if(bitfield_oxygen [row][0] != -1)
+		if(bit_matrix_oxygen [row][0] != -1)
 		{
-			for(int col=0; col<NUM_OF_BITS; col++)
+			for(int col=0; col<LENGTH_OF_LINES; col++)
 			{
-				oxygen_b[col] = bitfield_oxygen [row][col];
+				oxygen_b[col] = bit_matrix_oxygen [row][col];
 			}
 		}
 	}
 	printf("\nOxygen_b: ");
-	for (int i=0; i<NUM_OF_BITS; i++) {printf("%d", oxygen_b[i]);}
+	for (int i=0; i<LENGTH_OF_LINES; i++) {printf("%d", oxygen_b[i]);}
 
+	//bin -> dec conversion
+	int i = 11;
+	for(int n=0; n<12; n++)
+	{
+		oxygen_dec += oxygen_b[n] * pow(2,i);
+		i--;
+	}
+	printf("\nOyxgen: %d\n", oxygen_dec);
+
+	return oxygen_dec;
+}
+
+
+int compute_co2_rating(int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES])
+{
+	int co2_b[LENGTH_OF_LINES];
+	int co2_dec = 0;
+
+	// COPY BIT_MATRIX INTO "CO2" MATRIX
+	int bit_matrix_co2 [NUMBER_OF_LINES][LENGTH_OF_LINES];
+	for(int row=0; row<NUMBER_OF_LINES; row++)
+	{
+		for(int col=0; col<LENGTH_OF_LINES; col++)
+		{
+			bit_matrix_co2 [row][col] = bit_matrix [row][col];
+		}
+	}
 
 	// CO2 - COUNT 1S AND 0S, THEN DELETE ROWS WITH LESS FREQUENT BITS AT X-TH BIT POSITION
-	for(int x=0; x<NUM_OF_BITS; x++)
+	for(int x=0; x<LENGTH_OF_LINES; x++)
 	{
 		int ones = 0;
 		int zeroes = 0;
 
 		//counting part
-		for(int y=0; y<NUM_OF_INPUTS; y++)
+		for(int y=0; y<NUMBER_OF_LINES; y++)
 		{
-			if(bitfield_co2 [y][x] == 1) {ones++;}
-			else if(bitfield_co2 [y][x] == 0) {zeroes++;}
+			if(bit_matrix_co2 [y][x] == 1) {ones++;}
+			else if(bit_matrix_co2 [y][x] == 0) {zeroes++;}
 		}
 
 		//"deleting" part (-1)
-		for(int row=0; row<NUM_OF_INPUTS; row++)
+		for(int row=0; row<NUMBER_OF_LINES; row++)
 		{
 			if(ones > 0 && zeroes > 0)	//removing the less frequent parts repeatedly could delete the last remaining option 
 			{
 				if(ones >= zeroes)
 				{
-					if(bitfield_co2 [row][x] == 1)
+					if(bit_matrix_co2 [row][x] == 1)
 					{
-						for(int col=0; col<NUM_OF_BITS; col++)
+						for(int col=0; col<LENGTH_OF_LINES; col++)
 						{
-							bitfield_co2 [row][col] = -1;
+							bit_matrix_co2 [row][col] = -1;
 						}
 					}
 				}
 				else
 				{
-					if(bitfield_co2 [row][x] == 0)
+					if(bit_matrix_co2 [row][x] == 0)
 					{
-						for(int col=0; col<NUM_OF_BITS; col++)
+						for(int col=0; col<LENGTH_OF_LINES; col++)
 						{
-							bitfield_co2 [row][col] = -1;
+							bit_matrix_co2 [row][col] = -1;
 						}
 					}
 				}
@@ -275,37 +280,27 @@ int main()
 		}
 	}
 	//find co2_b array in matrix
-	for(int row=0; row<NUM_OF_INPUTS; row++)
+	for(int row=0; row<NUMBER_OF_LINES; row++)
 	{
-		if(bitfield_co2 [row][0] != -1)
+		if(bit_matrix_co2 [row][0] != -1)
 		{
-			for(int col=0; col<NUM_OF_BITS; col++)
+			for(int col=0; col<LENGTH_OF_LINES; col++)
 			{
-				co2_b[col] = bitfield_co2 [row][col];
+				co2_b[col] = bit_matrix_co2 [row][col];
 			}
 		}
 	}
-	printf("\nCO2_b: ");
-	for (int i=0; i<NUM_OF_BITS; i++) {printf("%d", co2_b[i]);}
-
-
+	printf("CO2_b: ");
+	for (int i=0; i<LENGTH_OF_LINES; i++) {printf("%d", co2_b[i]);}
 
 	//bin -> dec conversion
 	int i = 11;
 	for(int n=0; n<12; n++)
 	{
-		oxygen_dec += oxygen_b[n] * pow(2,i);
 		co2_dec += co2_b[n] * pow(2,i);
 		i--;
 	}
-	printf("\nOyxgen: %d", oxygen_dec);
-	printf("\nCO2: %d", co2_dec);
+	printf("\nCO2: %d\n", co2_dec);
 
-
-	//solution
-	int solution = oxygen_dec * co2_dec;
-	printf("\nSOLUTION: %d", solution);
-
-
-	return 0;
-}*/
+	return co2_dec;
+}

@@ -15,64 +15,83 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+
+#define PT1 1
+#define PT2 2
 
 #define INPUT_FILE	"inputs\\day_01.txt"
 #define NUMBER_OF_LINES	2000
 #define LENGTH_OF_LINES	4
 
 
+bool read_input_into_list(char* fileName, int* values);
+int count_increments(int* values, int partNo);
+
 int main()
 {	
+	int values[NUMBER_OF_LINES];
+	if (read_input_into_list(INPUT_FILE, values))
+	{
+		int result1 = count_increments(values, PT1);
+		int result2 = count_increments(values, PT2);
+		printf("RESULT1 = %d (Number of times the [single] value incremented)\n", result1);
+		printf("RESULT2 = %d (Number of times the [sliding window] value incremented)\n", result2);
+	}
+	else {return 1;}
+
+	return 0;
+}
+
+
+bool read_input_into_list(char* fileName, int* values)
+{
 	//OPEN INPUT FILE
-	FILE *pFile = fopen(INPUT_FILE, "r");
+	FILE *pFile = fopen(fileName, "r");
 	if (pFile == 0)
 	{
-		printf("Could not find input file: %s\n", INPUT_FILE);
-		return 1;
+		printf("Could not find input file: %s.\n", fileName);
+		return false;
 	}
-
 
 	//LOAD VALUES INTO BUFFER (LINE-BY-LINE)
-	char line[LENGTH_OF_LINES];
-	int values[NUMBER_OF_LINES];
-	int value_index = 0;
-	while(fgets(line ,LENGTH_OF_LINES, pFile))
-	{
-		fscanf(pFile, "%[^\n]", line);		//line -> str
-		values[value_index] = atoi(line);	//str  -> int
-		//printf("Value: %i\n", values[value_index]);
-		value_index++;
+	int idx = 0;
+	int value = 0;
+    while (!feof(pFile))
+    {
+		fscanf(pFile, "%d\n", &value);
+		values[idx] = value;
+		idx++;
 	}
 	fclose(pFile);
+	return true;
+}
 
 
-	//COUNT INCREMENTS OF [SINGLE VALUE]
-	int single_increments = 0;
-	for(int index = 1 ; index < NUMBER_OF_LINES ; index++)
+int count_increments(int* values, int partNo)
+{
+	int increments = 0;
+
+	if(partNo == 1)
 	{
-		int recent_value = values[index];
-		int previous_value = values[index-1];
-		if(recent_value > previous_value)
-		{	
-			single_increments++;
+		//COUNT INCREMENTS OF [SINGLE VALUE]
+		for(int idx = 1 ; idx < NUMBER_OF_LINES ; idx++)
+		{
+			int recent_value = values[idx];
+			int previous_value = values[idx-1];
+			if(recent_value > previous_value) {increments++;}
+		}
+	}
+	else if(partNo == 2)
+	{
+		//COUNT INCREMENTS OF [SLIDING WINDOW'S SUM]
+		for(int index = 1 ; index < NUMBER_OF_LINES-2 ; index++)
+		{
+			int recent_window = 	values[index] 	+ values[index+1] 	+ values[index+2];
+			int previous_window = 	values[index-1]	+ values[index] 	+ values[index+1];
+			if(recent_window > previous_window) {increments++;}
 		}
 	}
 
-	
-	//COUNT INCREMENTS OF [SLIDING WINDOW'S SUM]
-	int window_increments = 0;
-	for(int index = 1 ; index < NUMBER_OF_LINES-2 ; index++)
-	{
-		int recent_window = 	values[index] 	+ values[index+1] 	+ values[index+2];
-		int previous_window = 	values[index-1]	+ values[index] 	+ values[index+1];
-		if(recent_window > previous_window)
-		{	
-			window_increments++;
-		}
-	}
-
-
-	printf("RESULT1 = %i (Number of times the *single* value incremented)\n", single_increments);
-	printf("RESULT2 = %i (Number of times the *sliding window* value incremented)\n", window_increments);
-	return 0;
+	return increments;
 }
