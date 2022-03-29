@@ -1,7 +1,8 @@
 /*
 	Task:		How many measurements are larger than the previous measurement?
 	Input file:	%CD\inputs\day1.txt 	(contains 2000 lines of int values)
-	Solution: 	1548
+	Solution-1: 1548
+	Solution-2: 
 	Author:		Molnar Mate
 	Date:		2022.03.13.
 */
@@ -9,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define INPUT_FILE	"inputs\\day1.txt"
+#define INPUT_FILE	"inputs\\day_01.txt"
 #define LINE_LEN	4
 #define LINE_NUM	2000
 
