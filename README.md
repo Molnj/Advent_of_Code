@@ -1,7 +1,7 @@
 # Advent of Code 2021 challenge
 https://adventofcode.com/2021
 
-This project is dedicated to store my solutions of the AoC-2021 challenge.
+###This repository is dedicated to store my solutions of the AoC-2021 challenge - written in C.
 
 
 **Day01** - Counting number of increments between single values and their sliding sums.\
