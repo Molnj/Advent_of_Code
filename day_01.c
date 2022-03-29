@@ -75,4 +75,4 @@ int main()
 	printf("RESULT1 = %i (Number of times the *single* value incremented)\n", single_increments);
 	printf("RESULT2 = %i (Number of times the *sliding window* value incremented)\n", window_increments);
 	return 0;
-}
+} 
