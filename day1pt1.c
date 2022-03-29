@@ -9,36 +9,39 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAX_LINE_LENGTH	8
-#define NUM_OF_INPUTS	2000
+#define INPUT_FILE	"inputs\\day1.txt"
+#define LINE_LEN	4
+#define LINE_NUM	2000
 
 
 int main()
 {	
-	char line[8];
-	int values[NUM_OF_INPUTS];
-	int value_index = 0;
-	int increments = 0;
-
 	// OPEN INPUT FILE
-	FILE *file = fopen("inputs\\day1.txt", "r");
-	if (file == 0)
+	FILE *pFile = fopen(INPUT_FILE, "r");
+	if (pFile == 0)
 	{
 		printf("Could not find input file.\n");
 		return 1;
 	}
 
+
 	//LOAD VALUES INTO BUFFER (LINE-BY-LINE)
-	while(fgets(line ,MAX_LINE_LENGTH, file))
+	char line[LINE_LEN];
+	int values[LINE_NUM];
+	int value_index = 0;
+	while(fgets(line ,LINE_LEN, pFile))
 	{
-		fscanf(file, "%[^\n]", line);		//line -> str
+		fscanf(pFile, "%[^\n]", line);		//line -> str
 		values[value_index] = atoi(line);	//str  -> int
 		//printf("Value: %i\n", values[value_index]);
 		value_index++;
 	}
-	
+	fclose(pFile);
+
+
 	//CHECK IF VALUE INCREMENTED
-	for(int index = 1 ; index < NUM_OF_INPUTS ; index++)
+	int increments = 0;
+	for(int index = 1 ; index < LINE_NUM ; index++)
 	{
 		int recent_value = values[index];
 		int previous_value = values[index-1];
@@ -48,8 +51,7 @@ int main()
 		}
 	}
 
-	printf("Number of times the value incremented: %i", increments-1); //random 6422280 at the end, thus -1 
-	
-	fclose(file);
+
+	printf("Number of times the value incremented: %i", increments);
 	return 0;
 }

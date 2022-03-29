@@ -13,12 +13,10 @@
 #include <math.h>
 #include <string.h>
 
-#define INPUT_FILE_NAME	"inputs\\day4.txt"
-
-#define LINE_NUMBER	601		//number of rows in input txt 
-#define LINE_LENGTH	300		//max line length in input txt
-
-#define INPUT_NUM 	100		// list of drawn numbers (1st line) contains 100 numbers	//bingo numbers here range 1-99 (in reality 1-75 or 1-90)
+#define INPUT_FILE		"inputs\\day4.txt"
+#define LINE_NUMBER		601		//number of rows in input txt 
+#define LINE_LENGTH		300		//max line length in input txt
+#define INPUT_NUM 		100		// list of drawn numbers (1st line) contains 100 numbers	//bingo numbers here range 1-99 (in reality 1-75 or 1-90)
 
 #define X			5
 #define Y			5
@@ -28,8 +26,8 @@
 int main()
 {	
 	char line[LINE_NUMBER][LINE_LENGTH];	//character matrix - to be filled up with input txt
-	int numbers_drawn [INPUT_NUM];	//number of drawn characters (1st line)
-	int bingo_boards [Z][Y][X];		//100 pieces of 5x5 bingo boards, stacked
+	int numbers_drawn [INPUT_NUM];			//number of drawn characters (1st line)
+	int bingo_boards [Z][Y][X];				//100 pieces of 5x5 bingo boards, stacked
 
 	int cnt = 0;
 	char *token;
@@ -38,8 +36,8 @@ int main()
 
 
 	// OPEN INPUT FILE
-	FILE *ptr_file = fopen(INPUT_FILE_NAME, "r");
-	if (ptr_file == 0)
+	FILE *pFile = fopen(INPUT_FILE, "r");
+	if (pFile == 0)
 	{
 		printf("Could not find input file.\n");
 		return 1;
@@ -49,13 +47,13 @@ int main()
 	// TXT --> CHAR[row][column]
 	int i = 0;
 	int total = 0;
-	while(fgets(line[i], LINE_LENGTH, ptr_file))
+	while(fgets(line[i], LINE_LENGTH, pFile))
 	{
 		line[i][strlen(line[i]) - 1] = '\0';
 		i++;
 	}
 	total = i;
-	fclose(ptr_file);
+	fclose(pFile);
 
 
 	// CREATE NUMBERS TO BE DRAWN --- CHAR --> INT ("," delimiter)

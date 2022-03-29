@@ -3,7 +3,7 @@
 				find which card will have a BINGO first
 				calculate final score by: recently drawn winning number value * sum of unmarked numbers on board
 	Input file:	%CD\inputs\day4.txt
-	Solution: 	6592 (12th board wins first when 8 is drawn)
+	Solution: 	31755 (40th board wins first when 87 is drawn)
 	Author:		Molnar Mate
 	Date:		2022.03.15.
 */
@@ -14,10 +14,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define INPUT_FILE_NAME	"inputs\\day4.txt"
-
-#define LINE_NUMBER	601		//number of rows in input txt 
-#define LINE_LENGTH	300		//max line length in input txt
+#define INPUT_FILE_NAME		"inputs\\day4.txt"
+#define LINE_NUMBER			601		//number of rows in input txt 
+#define LINE_LENGTH			300		//max line length in input txt
 
 #define INPUT_NUM 	100		// list of drawn numbers (1st line) contains 100 numbers	//bingo numbers here range 1-99 (in reality 1-75 or 1-90)
 
@@ -42,8 +41,8 @@ int main()
 
 
 	// OPEN INPUT FILE
-	FILE *ptr_file = fopen(INPUT_FILE_NAME, "r");
-	if (ptr_file == 0)
+	FILE *pFile = fopen(INPUT_FILE_NAME, "r");
+	if (pFile == 0)
 	{
 		printf("Could not find input file.\n");
 		return 1;
@@ -53,13 +52,13 @@ int main()
 	// TXT --> CHAR[row][column]
 	int i = 0;
 	int total = 0;
-	while(fgets(line[i], LINE_LENGTH, ptr_file))
+	while(fgets(line[i], LINE_LENGTH, pFile))
 	{
 		line[i][strlen(line[i]) - 1] = '\0';
 		i++;
 	}
 	total = i;
-	fclose(ptr_file);
+	fclose(pFile);
 
 
 	// CREATE NUMBERS TO BE DRAWN --- CHAR --> INT ("," delimiter)
@@ -144,7 +143,7 @@ int main()
 						}
 						if(winning_cards == 0)
 						{
-							printf("LAST WINNING CARD (horizontal): %d", z);
+							printf("LAST WINNING CARD (horizontal): %d", z+1);
 							//CALCULATE POINTS
 							int unmarked_sum = 0;
 							for(y=0 ; y<5 ; y++)
@@ -179,7 +178,7 @@ int main()
 						}
 						if(winning_cards == 0)
 						{
-							printf("LAST WINNING CARD (horizontal): %d", z);
+							printf("LAST WINNING CARD (horizontal): %d", z+1);
 							//CALCULATE POINTS
 							int unmarked_sum = 0;
 							for(y=0 ; y<5 ; y++)

@@ -1,15 +1,16 @@
 Lessons Learned - AOC-2021 [C]
 
 DAY-1:
-	* how to use a list of integers in a txt file as an input
-	* don't forget that: for uses ; and while uses ,
+	* storing txt input in array of integers
 	
 DAY-2:
+	* storing txt input in array of strings - then splitting them up by ws
 	* how to break a string up by (whitespace) delimiter
 	* don't forget that: '' is for char "" is for str
 	* char --> int:		char a = '4';	int ia = a - '0';
 	
 DAY-3:
+	* storing txt input in matrix of integers (using ASCII - better way in day 4)
 	* 0-9 chars can be converted by substracting '0' --> '3' - '0' = 51 - 48 = 3
 	* removing the less frequent parts repeatedly can delete the last remaining option 
 	

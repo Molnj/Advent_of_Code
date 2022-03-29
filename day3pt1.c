@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <math.h>
 
+#define INPUT_FILE		"inputs\\day3.txt"
 #define NUM_OF_BITS		12
 #define NUM_OF_INPUTS	1000
 
@@ -27,8 +28,8 @@ int main()
 
 
 	// OPEN INPUT FILE
-	FILE *file = fopen("inputs\\day3.txt", "r");
-	if (file == 0)
+	FILE *pFile = fopen(INPUT_FILE, "r");
+	if (pFile == 0)
 	{
 		printf("Could not find input file.\n");
 		return 1;
@@ -38,20 +39,19 @@ int main()
 	// LOAD VALUES INTO "bitfield" MATRIX (line-by-line)
 	int row_cnt = 0;
 	char line[NUM_OF_BITS];
-	while(fgets(line, sizeof(line), file))
+	while(fgets(line, sizeof(line), pFile))
 	{
-		fscanf(file, "%[^\n]", line);		//read: line -> str
+		fscanf(pFile, "%[^\n]", line);		//read: line -> str
 		//read line char-by-char
 		for (int i=0; i<sizeof(line); i++)
 		{
-			//printf("%c", line[i]);
 			int bit = line[i] - '0';		// (ASCII value of '0-9') - (ASCII value of '0' (=48))
 			if(bit==-48) {bit=0;}			// TODO - weird bug only in first line (in char-int conversion) (-48 instead of 0)
 			bitfield [row_cnt][i] = bit;
 		}
 		row_cnt++;
 	}
-	fclose(file);
+	fclose(pFile);
 
 
 	//COUNT 1s and 0s in each column, based on frequency fill x-th gamma and epsilon bit positions
@@ -102,7 +102,5 @@ int main()
 	//solution
 	int solution = gamma_dec * epsilon_dec;
 	printf("\nSolution: %d", solution);
-
-
 	return 0;
 }

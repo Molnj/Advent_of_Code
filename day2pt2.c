@@ -12,8 +12,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define MAX_LINE_LENGTH	16
-#define NUM_OF_INPUTS	1000
+#define INPUT_FILE			"inputs\\day2.txt"
+#define MAX_LINE_LENGTH		16
+#define NUM_OF_INPUTS		1000
 
 
 int main()
@@ -23,8 +24,8 @@ int main()
 	int aim = 0;
 
 	// OPEN INPUT FILE
-	FILE *file = fopen("inputs\\day2.txt", "r");
-	if (file == 0)
+	FILE *pFile = fopen(INPUT_FILE, "r");
+	if (pFile == 0)
 	{
 		printf("Could not find input file.\n");
 		return 1;
@@ -33,7 +34,7 @@ int main()
 
 	//read txt line-by-line
 	char line[16];
-	while(fgets(line, sizeof(line), file))
+	while(fgets(line, sizeof(line), pFile))
 	{
 		bool flag = false;
 		//read line char-by-char
@@ -56,7 +57,7 @@ int main()
 			}
 		}
 	}	
-	fclose(file);
+	fclose(pFile);
 
 
 	int solution = horizontal * vertical;
