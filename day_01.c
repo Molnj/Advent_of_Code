@@ -25,7 +25,7 @@
 #define LENGTH_OF_LINES	4
 
 
-bool read_input_into_list(char* fileName, int* values);
+bool read_input_into_list(char *fileName, int *values);
 int count_increments(int* values, int partNo);
 
 int main()
@@ -44,7 +44,7 @@ int main()
 }
 
 
-bool read_input_into_list(char* fileName, int* values)
+bool read_input_into_list(char *fileName, int *values)
 {
 	//OPEN INPUT FILE
 	FILE *pFile = fopen(fileName, "r");
@@ -68,7 +68,7 @@ bool read_input_into_list(char* fileName, int* values)
 }
 
 
-int count_increments(int* values, int partNo)
+int count_increments(int *values, int partNo)
 {
 	int increments = 0;
 

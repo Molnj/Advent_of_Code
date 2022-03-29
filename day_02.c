@@ -34,13 +34,13 @@ typedef enum
 	DOWN 	= 2
 } direction_en;
 
-typedef struct
+typedef struct __attribute__((packed))
 {
 	direction_en direction;
 	int distance;
 } instruction_t;
 
-typedef struct
+typedef struct __attribute__((packed))
 {
 	int horizontal;
 	int vertical;
@@ -48,8 +48,8 @@ typedef struct
 } submarinePosition_t;
 
 
-bool read_input_into_instruction_list(char* fileName, instruction_t* instructions);
-unsigned int measure_submarine_path(instruction_t* instruction_list, int partNo);
+bool read_input_into_instruction_list(char *fileName, instruction_t *instructions);
+unsigned int measure_submarine_path(instruction_t *instruction_list, int partNo);
 
 
 int main()
@@ -68,7 +68,7 @@ int main()
 } 
 
 
-bool read_input_into_instruction_list(char* fileName, instruction_t* instructions)
+bool read_input_into_instruction_list(char *fileName, instruction_t *instructions)
 {
 	//OPEN INPUT FILE
 	FILE *pFile = fopen(fileName, "r");
