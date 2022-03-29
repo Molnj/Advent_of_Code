@@ -1,9 +1,11 @@
 Lessons Learned - AOC-2021 [C]
 
 DAY-1:
-	* storing txt input in array of integers
+	* storing txt input in array of integers (atoi() - though I shouldn't use it)
 	
 DAY-2:
+	* STRUCT & ENUM
+	* enum = 0,1,2,... számok elnevezve --y olvashatóbb kód. benne a nevek nem stringek, hanem intek.
 	* storing txt input in array of strings - then splitting them up by ws
 	* how to break a string up by (whitespace) delimiter
 	* don't forget that: '' is for char "" is for str
