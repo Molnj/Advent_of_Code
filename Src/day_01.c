@@ -16,11 +16,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "../Inc/std_types.h"
 
 #define PT1 1
 #define PT2 2
 
-#define INPUT_FILE	"inputs\\day_01.txt"
+#define INPUT_FILE	"..\\txt_inputs\\day_01.txt"
 #define NUMBER_OF_LINES	2000
 #define LENGTH_OF_LINES	4
 
@@ -38,9 +39,9 @@ int main()
 		printf("RESULT1 = %d (Number of times the [single] value incremented)\n", result1);
 		printf("RESULT2 = %d (Number of times the [sliding window] value incremented)\n", result2);
 	}
-	else {return 1;}
+	else {return E_NOT_OK;}
 
-	return 0;
+	return E_OK;
 }
 
 

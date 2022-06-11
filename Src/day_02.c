@@ -23,7 +23,7 @@
 #define PT1 1
 #define PT2 2
 
-#define INPUT_FILE			"inputs\\day_02.txt"
+#define INPUT_FILE			"..\\txt_inputs\\day_02.txt"
 #define NUMBER_OF_LINES		1000
 #define LENGTH_OF_LINES		16
 

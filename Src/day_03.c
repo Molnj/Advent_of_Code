@@ -23,8 +23,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
+#include "../Inc/std_types.h"
 
-#define INPUT_FILE		"inputs\\day_03.txt"
+#define INPUT_FILE		"..\\txt_inputs\\day_03.txt"
 #define NUMBER_OF_LINES	1000
 #define LENGTH_OF_LINES	12
 
@@ -44,13 +45,13 @@ int main()
 		printf("\nRESULT1 = %d (power rating)", result1);
 		printf("\nRESULT2 = %d (life support rating)\n", result2);
 	}
-	else {return 1;}
+	else {return E_NOT_OK;}
 
-	return 0;
+	return E_OK;
 }
 
 
-bool read_input_into_bit_matrix(char* fileName, int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES])
+bool read_input_into_bit_matrix(char *fileName, int bit_matrix[NUMBER_OF_LINES][LENGTH_OF_LINES])
 {
 	// OPEN INPUT FILE
 	FILE *pFile = fopen(fileName, "r");

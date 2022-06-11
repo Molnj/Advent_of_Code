@@ -24,21 +24,23 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define INPUT_FILE		"inputs\\day_04.txt"
+#define INPUT_FILE			"inputs\\day_04.txt"
 #define NUMBER_OF_LINES		601		//number of rows in input txt 
 #define LENGTH_OF_LINES		300		//max line length in input txt
-#define INPUT_NUM 		100		// list of drawn numbers (1st line) contains 100 numbers	//bingo numbers here range 1-99 (in reality 1-75 or 1-90)
 
-#define X			5
-#define Y			5
-#define Z			100
+#define INPUT_NUM 			100		// list of drawn numbers (1st line) contains 100 numbers	//bingo numbers here range 1-99 (in reality 1-75 or 1-90)
+
+#define BOARD_WIDTH			5
+#define BOARD_HEIGHT		5
+#define BOARD_SIZE			BOARD_WIDTH * BOARD_HEIGHT
+#define BOARD_NUMBER		100		//number of boards
 
 
 int main()
 {	
 	char line[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
 	int numbers_drawn [INPUT_NUM];			//number of drawn characters (1st line)
-	int bingo_boards [Z][Y][X];				//100 pieces of 5x5 bingo boards, stacked
+	int bingo_boards [BOARD_NUMBER][BOARD_HEIGHT][BOARD_WIDTH];				//100 pieces of 5x5 bingo boards, stacked
 
 	int cnt = 0;
 	char *token;
