@@ -21,31 +21,19 @@
 #define PT1 1
 #define PT2 2
 
-#define INPUT_FILE	"..\\txt_inputs\\day_01.txt"
+#define INPUT_FILE		"..\\txt_inputs\\day_01.txt"
 #define NUMBER_OF_LINES	2000
 #define LENGTH_OF_LINES	4
 
+int values[NUMBER_OF_LINES];
 
-bool read_input_into_list(char *fileName, int *values);
+
+bool read_input(char *fileName, int *values);
 int count_increments(int* values, int partNo);
 
-int main()
-{	
-	int values[NUMBER_OF_LINES];
-	if (read_input_into_list(INPUT_FILE, values))
-	{
-		int result1 = count_increments(values, PT1);
-		int result2 = count_increments(values, PT2);
-		printf("RESULT1 = %d (Number of times the [single] value incremented)\n", result1);
-		printf("RESULT2 = %d (Number of times the [sliding window] value incremented)\n", result2);
-	}
-	else {return E_NOT_OK;}
-
-	return E_OK;
-}
 
 
-bool read_input_into_list(char *fileName, int *values)
+bool read_input(char *fileName, int *values)
 {
 	//OPEN INPUT FILE
 	FILE *pFile = fopen(fileName, "r");
@@ -95,4 +83,20 @@ int count_increments(int *values, int partNo)
 	}
 
 	return increments;
+}
+
+
+
+int main()
+{	
+	if (! read_input(INPUT_FILE, values))
+	{
+		return E_NOT_OK;
+	}
+
+	int result1 = count_increments(values, PT1);
+	int result2 = count_increments(values, PT2);
+	printf("RESULT1 = %d (Number of times the [single] value incremented)\n", result1);
+	printf("RESULT2 = %d (Number of times the [sliding window] value incremented)\n", result2);
+	return E_OK;
 }

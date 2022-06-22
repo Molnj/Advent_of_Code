@@ -15,6 +15,7 @@
 
 	SOLUTION-1: 6592 (12th board wins first when 8 is drawn)
 	SOLUTION-2: 31755 (40th board wins last when 87 is drawn)
+//////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
 
@@ -28,17 +29,21 @@
 #define PT1 1
 #define PT2 2
 
-#define INPUT_FILE			"inputs\\day_04.txt"
+#define INPUT_FILE			"..\\txt_inputs\\day_04.txt"
 #define NUMBER_OF_LINES		601		//number of rows in input txt 
 #define LENGTH_OF_LINES		300		//max line length in input txt
 
+char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
+
 #define BOARD_WIDTH			5
 #define BOARD_HEIGHT		5
-#define BOARD_SIZE			BOARD_HEIGHT * BOARD_WIDTH
+#define BOARD_SIZE			(BOARD_HEIGHT * BOARD_WIDTH)
 #define NUM_OF_BOARDS		100		//number of boards
-
 #define NUM_OF_DRAWS		100		// list of drawn numbers (1st line) contains 100 numbers	//bingo numbers here range 1-99 (in reality 1-75 or 1-90)
 
+int result_1, result_2;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 typedef struct __attribute__((packed))
 {
@@ -46,182 +51,267 @@ typedef struct __attribute__((packed))
 	bool marked;
 } bingo_board_number_t;
 
+
 typedef struct __attribute__((packed))
 {
 	bingo_board_number_t board_numbers[BOARD_HEIGHT][BOARD_WIDTH];
 	bool board_won;
 } bingo_board_t;
 
+
 typedef struct __attribute__((packed))
 {
 	bingo_board_t boards[NUM_OF_BOARDS];
-	int drawn_numbers[NUM_OF_DRAWS];
+	int draw_list[NUM_OF_DRAWS];
 	uint32_t draw_count;
 	int number_of_winning_boards;
+	int last_winning_board;
 } bingo_game_t;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
-int main()
-{	
-	bingo_game_t bingo;
-
-	int
-	if (read_first_line_into_number_list(INPUT_FILE, bingo.))
-	{
-
-	}
-	char line[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
-	int numbers_drawn [INPUT_NUM];			//number of drawn characters (1st line)
-	int bingo_boards [BOARD_NUMBER][BOARD_HEIGHT][BOARD_WIDTH];				//100 pieces of 5x5 bingo boards, stacked
-
-	int cnt = 0;
-	char *token;
-
-	int win_cnt = 0;
-
-
-	// OPEN INPUT FILE
-	FILE *pFile = fopen(INPUT_FILE, "r");
+bool read_input(char* fileName) 
+{
+	FILE *pFile = fopen(fileName, "r");
 	if (pFile == 0)
 	{
-		printf("Could not find input file.\n");
-		return 1;
+		printf("Could not find input file: %s.\n", fileName);
+		return E_NOT_OK;
 	}
 
-
-	// TXT --> CHAR[row][column]
+	// .TXT --> CHAR[row][column]
 	int i = 0;
-	int total = 0;
-	while(fgets(line[i], LENGTH_OF_LINES, pFile))
+	while(fgets(txt[i], LENGTH_OF_LINES, pFile))
 	{
-		line[i][strlen(line[i]) - 1] = '\0';
+		txt[i][strlen(txt[i]) - 1] = '\0';
 		i++;
 	}
-	total = i;
+
 	fclose(pFile);
+	return E_OK;
+}
 
 
-	// CREATE NUMBERS TO BE DRAWN --- CHAR --> INT ("," delimiter)
-	cnt = 0;
-	token = strtok(line[0], ",");
+void print_items(bingo_game_t *bingo)
+{
+	for(int i = 0; i<100; i++)
+	{
+		printf("%d, ", bingo->draw_list[i]);
+	}
+	printf("\n\n");
+
+	for(int  z= 0; z<100; z++)
+	{
+		printf("%d\n", z+1);
+		for(int y = 0; y<5; y++)
+		{
+			for(int x = 0; x<5; x++)
+			{
+				printf("%d\t", bingo->boards[z].board_numbers[y][x].value);
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+}
+
+
+void create_draw_list(bingo_game_t *bingo)
+{
+	int idx = 0;
+	char *token = strtok(txt[0], ",");
 	while( token != NULL )
 	{
-		numbers_drawn[cnt] = atoi(token);
+		bingo->draw_list[idx] = atoi(token);
 		token = strtok(NULL, ",");
-		cnt++;
+		idx++;
 	}
+}
 
 
-	//CREATE BINGO CARD STACK
-	int x = 0;
-	int y = 0;
-	int z = 0;	// int x, y, z = 0; not working - TODO ?
-	cnt = 0;
-
+void create_bingo_sheets(bingo_game_t *bingo)
+{
+	int idx = 0;
+	int x, y, z;
 	for(int i=2 ; i<NUMBER_OF_LINES ; i++)
 	{
-		if(cnt != 5)
+		if(idx != 5)
 		{
 			x = 0;
-			token = strtok(line[i], " ");
+			char *token = strtok(txt[i], " ");
 			while( token != NULL )
 			{
-				bingo_boards [z][y][x] = atoi(token);
+				int placeholder_for_some_reason = atoi(token);
+				bingo->boards[z].board_numbers[y][x].value = placeholder_for_some_reason;
+				bingo->boards[z].board_numbers[y][x].marked = false;
+				bingo->last_winning_board = 0;
+				bingo->boards[z].board_won = false;
 				token = strtok(NULL, " ");
 				x++;
 			}
 			y++;
-			cnt++;
+			idx++;
 		}
 		else
 		{
-			cnt = 0;
+			idx = 0;
 			x = 0;
 			y = 0;
 			z++;
 		}
 	}
+}
 
-	// START DRAWING NUMBERS
-	for(i=0; i<INPUT_NUM; i++)
+
+void mark_sheets(bingo_game_t *bingo, int next_draw)
+{
+	int x, y, z;
+	for(int  z= 0; z<100; z++)
 	{
-		printf("\nNumber drawn: %d ",numbers_drawn[i]);
-		
-		//MARK CARDS
-		for(z=0 ; z<100 ; z++)
+		for(int y = 0; y<5; y++)
 		{
-			for(y=0 ; y<5 ; y++)
+			for(int x = 0; x<5; x++)
 			{
-				for(x=0 ; x<5 ; x++)
+				if(bingo->boards[z].board_numbers[y][x].value == next_draw)
 				{
-					if (bingo_boards[z][y][x] == numbers_drawn[i])
-					{
-						bingo_boards[z][y][x] = -1;
-					}
-				}
-			}
-		}
-
-
-		//CHECK CARDS
-		for(z=0 ; z<100 ; z++)
-		{
-			for(y=0 ; y<5 ; y++)
-			{
-				win_cnt = 0;
-				for(x=0 ; x<5 ; x++)
-				{
-					if (bingo_boards[z][y][x] == -1) {win_cnt++;}
-					if (win_cnt == 5)
-					{
-						printf("WINNING CARD (vertical): %d", z);
-						//CALCULATE POINTS
-						int unmarked_sum = 0;
-						for(y=0 ; y<5 ; y++)
-						{
-							for(x=0 ; x<5 ; x++)
-							{
-								if (bingo_boards[z][y][x] != -1) {unmarked_sum += bingo_boards[z][y][x];}
-							}
-
-						}
-						int result = unmarked_sum * numbers_drawn[i];
-						printf("\nRESULT: %d", result);
-						exit(0);
-					}
-				}
-			}
-			for(x=0 ; x<5 ; x++)
-			{
-				win_cnt = 0;
-				for(y=0 ; y<5 ; y++)
-				{
-					if (bingo_boards[z][y][x] == -1) {win_cnt++;}
-					if (win_cnt == 5)
-					{
-						printf("WINNING CARD (horizontal): %d", z);
-						//CALCULATE POINTS
-						int unmarked_sum = 0;
-						for(y=0 ; y<5 ; y++)
-						{
-							for(x=0 ; x<5 ; x++)
-							{
-								if (bingo_boards[z][y][x] != -1) {unmarked_sum += bingo_boards[z][y][x];}
-							}
-
-						}
-						int result = unmarked_sum * numbers_drawn[i];
-						printf("\nRESULT: %d", result);
-						exit(0);
-					}
+					bingo->boards[z].board_numbers[y][x].marked = true;
 				}
 			}
 		}
 	}
-
-	
 }
 
 
+bool check_for_winner(bingo_game_t *bingo)
+{
+	int cnt;
+	for(int z = 0; z < NUM_OF_BOARDS; z++)
+	{
+		//check row
+		cnt = 0;
+		for(int y = 0; y < BOARD_HEIGHT; y++)
+		{
+			for(int x = 0; x < BOARD_WIDTH; x++)
+			{
+				if(bingo->boards[z].board_numbers[y][x].marked)
+				{
+					cnt++;
+				}
+			}
+			if(cnt == 5)
+			{
+				if(bingo->boards[z].board_won == false)	// need to check again, since it could have changed in row phase
+				{
+					printf("Winning board: %d\n", z+1);
+					bingo->boards[z].board_won = true;
+					bingo->number_of_winning_boards++;
+					bingo->last_winning_board = z;
+					//NOTE: eredetileg itt volt return E_OK, de rontott, mert volt, hogy egyszerre több is jól lett kitöltve
+				}
+			}
+			cnt = 0;
+		}
+		
+		//check column
+		cnt = 0;
+		for(int y = 0; y < BOARD_HEIGHT; y++)
+		{
+			for(int x = 0; x < BOARD_WIDTH; x++)
+			{
+				if(bingo->boards[z].board_numbers[x][y].marked)
+				{
+					cnt++;
+				}
+			}
+			if(cnt == 5)
+			{
+				if(bingo->boards[z].board_won == false)	// need to check again, since it could have changed in row phase
+				{
+					printf("Winning board: %d\n", z+1);
+					bingo->boards[z].board_won = true;
+					bingo->number_of_winning_boards++;
+					bingo->last_winning_board = z;
+				}
+			}
+			cnt = 0;
+		}
+	}
+}
 
 
+int calculate_results(bingo_game_t *bingo, int winning_draw)
+{
+	//Result is: product of the winning drawn number and the sum of the unmarked numbers on the winning board
+	int result = 0;
+	int unmarked_sum = 0;
+	int i = 0;
+
+	i = bingo->last_winning_board;
+ 	for(int x = 0; x < BOARD_WIDTH; x++)
+	{
+		for(int y = 0; y < BOARD_HEIGHT; y++)
+		{
+			if(! bingo->boards[i].board_numbers[x][y].marked)
+			{
+				unmarked_sum += bingo->boards[i].board_numbers[x][y].value;
+			}
+		}
+	}
+	result = unmarked_sum * winning_draw;
+	//printf("%d, %d\n", unmarked_sum, winning_draw);
+
+	return result;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+int main()
+{	
+	bingo_game_t bingo;
+	bingo.last_winning_board = 0;
+	bingo.number_of_winning_boards = 0;
+
+	bool win_flag = false;
+	int next_draw;
+	int num_of_winners;
+
+	if(read_input(INPUT_FILE))
+	{
+		printf("Reading input file was not successful. Closing Application..\n");
+		return E_NOT_OK;
+	}
+
+	create_draw_list(&bingo);
+	create_bingo_sheets(&bingo);
+	//print_items(&bingo);
+
+	for(int i = 0; i < NUM_OF_DRAWS; i++)
+	{
+		next_draw = bingo.draw_list[i];
+		mark_sheets(&bingo, next_draw);
+		check_for_winner(&bingo);
+
+		if(bingo.number_of_winning_boards == 1 && result_1 == 0)
+		{
+			result_1 = calculate_results(&bingo, next_draw);
+		}
+		if(bingo.number_of_winning_boards == NUM_OF_BOARDS && result_2 == 0)
+		{
+			result_2 = calculate_results(&bingo, next_draw);
+		}
+	}
+
+	printf("Result_1: %d\n", result_1);
+	printf("Result_2: %d\n", result_2);
+
+	return E_OK;
+}
+
+/*
+ * biggest headaches:
+ * 		- struggles with uninitialized values in structures (34523432 instead 0)
+ * 		- had to check for result == 0, otherwise condition will be fulfilled later
+ * 		- check_for_winner() used to be bool and returned after finding a winner,
+ *  	  this way only 66 winning board were found since simultaneous wins were not handled
+ * 		- TODO - what if two or more are winning simultaneously as first/last boards?
+*/

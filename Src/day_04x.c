@@ -24,7 +24,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define INPUT_FILE			"inputs\\day_04.txt"
+#define INPUT_FILE			("..\\txt_inputs\\day_04.txt")
 #define NUMBER_OF_LINES		601		//number of rows in input txt 
 #define LENGTH_OF_LINES		300		//max line length in input txt
 
