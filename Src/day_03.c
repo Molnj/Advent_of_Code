@@ -2,7 +2,7 @@
 	AUTHOR:		Molnar Mate
 	DATE:		2022.03.14
 
-	INPUT FILE:	%CD\inputs\day_03.txt
+	INPUT FILE:	..\txt_inputs\day_03.txt
 				(contains 1000 lines of 12 bit long binary numbers)
 
 	TASK-1:		Finding most common n-th bits in 1000piece 12bit binary number list.

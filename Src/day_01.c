@@ -2,7 +2,7 @@
 	AUTHOR:		Molnar Mate
 	DATE:		2022.03.13
 
-	INPUT FILE:	%CD\inputs\day_01.txt
+	INPUT FILE: ..\txt_inputs\day_01.txt
 				(contains 2000 lines of int values (max 4 character long))
 
 	TASK-1:		How many [SINGLE VALUE] measurements are larger than the previous measurement?

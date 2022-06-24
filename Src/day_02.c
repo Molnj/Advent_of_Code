@@ -2,7 +2,7 @@
 	AUTHOR:		Molnar Mate
 	DATE:		2022.03.14
 
-	INPUT FILE:	%CD\inputs\day_02.txt
+	INPUT FILE:	..\txt_inputs\day_02.txt
 				(contains 1000 lines of [direction + distance] combinations
 
 	TASK-1:		Each input line has a direction (forward, up, down) and a distance (1-9)

@@ -26,9 +26,6 @@
 #include <stdbool.h>
 #include "../Inc/std_types.h"
 
-#define PT1 1
-#define PT2 2
-
 #define INPUT_FILE			"..\\txt_inputs\\day_04.txt"
 #define NUMBER_OF_LINES		601		//number of rows in input txt 
 #define LENGTH_OF_LINES		300		//max line length in input txt
@@ -120,9 +117,11 @@ void create_draw_list(bingo_game_t *bingo)
 {
 	int idx = 0;
 	char *token = strtok(txt[0], ",");
+	char *pEnd;
 	while( token != NULL )
 	{
-		bingo->draw_list[idx] = atoi(token);
+		int placeholder_for_some_reason = atoi(token);//strtol(token, &pEnd, 10);
+		bingo->draw_list[idx] = placeholder_for_some_reason;
 		token = strtok(NULL, ",");
 		idx++;
 	}
@@ -139,9 +138,10 @@ void create_bingo_sheets(bingo_game_t *bingo)
 		{
 			x = 0;
 			char *token = strtok(txt[i], " ");
+			char *pEnd;
 			while( token != NULL )
 			{
-				int placeholder_for_some_reason = atoi(token);
+				int placeholder_for_some_reason = strtol(token, &pEnd, 10);
 				bingo->boards[z].board_numbers[y][x].value = placeholder_for_some_reason;
 				bingo->boards[z].board_numbers[y][x].marked = false;
 				bingo->last_winning_board = 0;
@@ -202,7 +202,7 @@ bool check_for_winner(bingo_game_t *bingo)
 			{
 				if(bingo->boards[z].board_won == false)	// need to check again, since it could have changed in row phase
 				{
-					printf("Winning board: %d\n", z+1);
+					//printf("Winning board: %d\n", z+1);
 					bingo->boards[z].board_won = true;
 					bingo->number_of_winning_boards++;
 					bingo->last_winning_board = z;
@@ -227,7 +227,7 @@ bool check_for_winner(bingo_game_t *bingo)
 			{
 				if(bingo->boards[z].board_won == false)	// need to check again, since it could have changed in row phase
 				{
-					printf("Winning board: %d\n", z+1);
+					//printf("Winning board: %d\n", z+1);
 					bingo->boards[z].board_won = true;
 					bingo->number_of_winning_boards++;
 					bingo->last_winning_board = z;
