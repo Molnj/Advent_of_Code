@@ -7,12 +7,12 @@
 
 	TASK-1:		There is a field (seems to be) of 1000 × 1000 in size.
                 the input vektor represent "hydrotermal vents" - dangerous lines
-                The program most count at how many point these vents overlap
-    TASK-2:     
+                The program most count at how many point these vents overlap (use only the horizontal and vertical ones)
+    TASK-2:     Use the 45° diagonal ones too
 
 
-	SOLUTION-1: 
-	SOLUTION-2: 
+	SOLUTION-1: 5442
+	SOLUTION-2: 19671
 //////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
@@ -72,6 +72,7 @@ bool read_input(char* fileName)
 	return E_OK;
 }
 
+
 void process_readings(field_t *field)
 {
 	char *pToken = NULL;
@@ -118,6 +119,7 @@ void process_readings(field_t *field)
 	}
 }
 
+
 void null_field(field_t *field)
 {
 	for(int i = 0; i < FIELD_HEIGTH; i++)
@@ -129,7 +131,16 @@ void null_field(field_t *field)
 	}
 }
 
-void mark_vents(field_t *field)
+
+int abs_diff(int a, int b)
+{
+	int min = (a > b) ? b : a;
+	int max = (a > b) ? a : b;
+	return (max - min);
+}
+
+
+void mark_vents_non_diagonal(field_t *field)
 {
 	for(int i = 0; i < NUMBER_OF_LINES; i++)
 	{
@@ -138,7 +149,7 @@ void mark_vents(field_t *field)
 		{
 			if (field->vents[i].y1 >= field->vents[i].y2)
 			{
-				for (uint16_t y = field->vents[i].y2; y <= field->vents[i].y1; y++)
+				for (uint16_t y = field->vents[i].y2; y <= field->vents[i].y1; y++) 
 				{
 					field->field_matrix[field->vents[i].x1][y]++;			
 				}
@@ -153,7 +164,7 @@ void mark_vents(field_t *field)
 		}
 
 		//HORIZONTAL VENT
-		if (field->vents[i].y1 == field->vents[i].y2)
+		else if (field->vents[i].y1 == field->vents[i].y2)
 		{
 			if (field->vents[i].x1 >= field->vents[i].x2)
 			{
@@ -170,9 +181,54 @@ void mark_vents(field_t *field)
 				}
 			}
 		}
-
 	}
 }
+
+
+void mark_vents_diagonal(field_t *field)
+{
+	for(int i = 0; i < NUMBER_OF_LINES; i++)
+	{
+		int absdiff_x = abs_diff(field->vents[i].x1, field->vents[i].x2);
+		int absdiff_y = abs_diff(field->vents[i].y1, field->vents[i].y2);
+		if(absdiff_x == absdiff_y)
+		{
+			if (field->vents[i].x1 < field->vents[i].x2 && field->vents[i].y1 < field->vents[i].y2)
+			{
+				uint16_t y = field->vents[i].y1;
+				for (uint16_t x = field->vents[i].x1; x <= field->vents[i].x2 ; x++) {
+					field->field_matrix[x][y]++;
+					y++;
+				}
+			}
+			if (field->vents[i].x1 < field->vents[i].x2 && field->vents[i].y1 > field->vents[i].y2)
+			{
+				uint16_t y = field->vents[i].y1;
+				for (uint16_t x = field->vents[i].x1; x <= field->vents[i].x2 ; x++) {
+					field->field_matrix[x][y]++;
+					y--;
+				}
+			}
+			if (field->vents[i].x1 > field->vents[i].x2 && field->vents[i].y1 < field->vents[i].y2)
+			{
+				uint16_t y = field->vents[i].y2;
+				for (uint16_t x = field->vents[i].x2; x <= field->vents[i].x1 ; x++) {
+					field->field_matrix[x][y]++;
+					y--;
+				}
+			}
+			if (field->vents[i].x1 > field->vents[i].x2 && field->vents[i].y1 > field->vents[i].y2)
+			{
+				uint16_t y = field->vents[i].y2;
+				for (uint16_t x = field->vents[i].x2; x <= field->vents[i].x1 ; x++) {
+					field->field_matrix[x][y]++;
+					y++;
+				}
+			}
+		}
+	}
+}
+
 
 void print_field(field_t *field)
 {
@@ -213,15 +269,23 @@ int main(int argc, char **argv)
 		return E_NOT_OK;
 	}
 	process_readings(&field);
-	mark_vents(&field);
-	print_field(&field);
-	int danger = count_danger(&field);
-	printf("result-1: %d", danger);
+
+	mark_vents_non_diagonal(&field);
+	int result_1 = count_danger(&field);
+
+	mark_vents_diagonal(&field);
+	int result_2 = count_danger(&field);
+
+	printf("result_1: %d\n", result_1);
+	printf("result_2: %d\n", result_2);
+
+	//print_field(&field);
 
     return E_OK;
 }
 
 /*
  * biggest headaches:
- * 		- ...
+ * 		- matrix in structure was not initialized -- random values
+ * 		- accidental infinite loop ending in code=3221225477
 */
