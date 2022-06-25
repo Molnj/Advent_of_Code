@@ -137,8 +137,8 @@ void create_bingo_sheets(bingo_game_t *bingo)
 		if(idx != 5)
 		{
 			x = 0;
-			char *token = strtok(txt[i], " ");
 			char *pEnd;
+			char *token = strtok(txt[i], " ");
 			while( token != NULL )
 			{
 				int placeholder_for_some_reason = strtol(token, &pEnd, 10);
