@@ -1,27 +1,23 @@
 /*
 	AUTHOR:		Molnar Mate
-	DATE:		2022.
-
+	DATE:		2022.xx.xx.
 	INPUT FILE:	..\txt_inputs\day_XX.txt
-				(description of txt)
 
-	TASK-1:		
-    TASK-2:     
+	####################################################################################################
+	AOC description
+	
 
-
-	SOLUTION-1: 
-	SOLUTION-2: 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
-#include <math.h>
 #include <string.h>
 #include <stdbool.h>
 #include "../Inc/std_types.h"
 
-#define INPUT_FILE			"..\\txt_inputs\\day_04.txt"
+#define INPUT_FILE			"..\\txt_inputs\\day_xx.txt"
 #define NUMBER_OF_LINES		500		//number of rows in input txt 
 #define LENGTH_OF_LINES		18		//max line length in input txt
 char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
@@ -53,6 +49,23 @@ bool read_input(char* fileName)
 	return E_OK;
 }
 
+void process_input()//ADD PARAM
+{
+	char *token = NULL;
+	char *end = NULL;
+	int idx = 0;
+
+	token = strtok(txt[0], ",");
+	while( token != NULL )
+	{
+		//uint8_t days_till_reproduction = strtol(token, &end, 10);
+		//fishes->fish_groups[days_till_reproduction]++;
+		//fishes->count++;
+		token = strtok(NULL, ",");
+		idx++;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char **argv)
@@ -63,8 +76,9 @@ int main(int argc, char **argv)
 		printf("Error: could not find input file: %s.\n", INPUT_FILE);
 		return E_NOT_OK;
 	}
+	process_input();//ADD PARAM
 
-    return 0;
+    return E_OK;
 }
 
 /*
