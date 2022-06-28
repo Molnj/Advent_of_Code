@@ -13,4 +13,13 @@
 *Process 2D array, then remove certain rows*
 
 - **Day04** - Bingo game against octopus.\
-*Mark multiple matrices -->  5×5×100 3D-matrix?*
+*Handling points in 2D matrices*
+
+- **Day05** - Avoiding geothermal vents.\
+*Handling vectors (straight & 45°diagonal) in 2D matrix*
+
+- **Day06** - Predicting lanternfish population.\
+*Handling exponential growth and big numbers*
+
+- **Day07** - Coordinating shrimp submarines.\
+*Finding middle of random series (linear & exponential method)*

@@ -55,6 +55,7 @@ void process_input()//ADD PARAM
 	char *end = NULL;
 	int idx = 0;
 
+	/*
 	token = strtok(txt[0], ",");
 	while( token != NULL )
 	{
@@ -64,12 +65,17 @@ void process_input()//ADD PARAM
 		token = strtok(NULL, ",");
 		idx++;
 	}
+	*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char **argv)
 {
+	uint32_t result_1 = 0;
+	uint32_t result_2 = 0;
+
+	//STRUCT
 
 	if(read_input(INPUT_FILE))
 	{
@@ -77,6 +83,10 @@ int main(int argc, char **argv)
 		return E_NOT_OK;
 	}
 	process_input();//ADD PARAM
+
+	printf("result_1 = %lu\n", result_1);
+	printf("result_2 = %lu\n", result_2);
+
 
     return E_OK;
 }
