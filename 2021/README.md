@@ -23,3 +23,6 @@
 
 - **Day07** - Coordinating shrimp submarines.\
 *Finding middle of random series (linear & exponential method)*
+
+- **Day08** - 7 segment display problem.\
+*creating a decision tree based on input length and number of matching elements*
