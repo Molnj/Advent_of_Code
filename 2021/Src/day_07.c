@@ -76,7 +76,7 @@
 #define INPUT_FILE			"..\\txt_inputs\\day_07.txt"
 #define NUMBER_OF_LINES		1		//number of rows in input txt 
 #define LENGTH_OF_LINES		4000	//max line length in input txt
-#define MAX_SHRIMPS			1000	//max number of shrimps
+#define MAX_CRABS			1000	//max number of crabs
 char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
 
 
@@ -84,10 +84,10 @@ char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up
 
 typedef struct
 {
-	uint16_t x_pos[MAX_SHRIMPS];
+	uint16_t x_pos[MAX_CRABS];
 	uint16_t x_pos_max;
 	uint16_t count;
-} shrimp_subs_t;
+} crab_subs_t;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -111,7 +111,7 @@ bool read_input(char* fileName)
 	return E_OK;
 }
 
-void process_input(shrimp_subs_t *shrimps)
+void process_input(crab_subs_t *crabs)
 {
 	char *token = NULL;
 	char *end = NULL;
@@ -121,25 +121,25 @@ void process_input(shrimp_subs_t *shrimps)
 	while( token != NULL )
 	{
 		uint16_t x_pos = strtol(token, &end, 10);
-		shrimps->x_pos[idx] = x_pos;
-		shrimps->x_pos_max = (x_pos > shrimps->x_pos_max) ? x_pos : shrimps->x_pos_max;
-		shrimps->count++;
+		crabs->x_pos[idx] = x_pos;
+		crabs->x_pos_max = (x_pos > crabs->x_pos_max) ? x_pos : crabs->x_pos_max;
+		crabs->count++;
 		token = strtok(NULL, ",");
 		idx++;
 	}
 }
 
-uint32_t calculate_optimal_allignment(shrimp_subs_t *shrimps, char x)
+uint32_t calculate_optimal_allignment(crab_subs_t *crabs, char x)
 {
 	uint32_t fuel_needed = UINT32_MAX;
 	uint32_t temp = 0;
 	uint32_t dist = 0;
-	for(uint16_t i = 0; i <= shrimps->x_pos_max; i++) //trying all possible positions
+	for(uint16_t i = 0; i <= crabs->x_pos_max; i++) //trying all possible positions
 	{
 		temp = 0;
-		for(uint16_t j = 0; j < shrimps->count; j++)	//distance from all the shrimps
+		for(uint16_t j = 0; j < crabs->count; j++)	//distance from all the crabs
 		{
-			dist = (i > shrimps->x_pos[j]) ? (i - shrimps->x_pos[j]) : (shrimps->x_pos[j] - i);
+			dist = (i > crabs->x_pos[j]) ? (i - crabs->x_pos[j]) : (crabs->x_pos[j] - i);
 			if(x == 'h') 	//fuel consumption - linear human math
 			{
 				temp += dist;
@@ -162,7 +162,7 @@ uint32_t calculate_optimal_allignment(shrimp_subs_t *shrimps, char x)
 
 int main(int argc, char **argv)
 {
-	shrimp_subs_t shrimps = {{0},0,0};
+	crab_subs_t crabs = {{0},0,0};
 	uint32_t fuel_needed = 0;
 
 	if(read_input(INPUT_FILE))
@@ -170,12 +170,12 @@ int main(int argc, char **argv)
 		printf("Error: could not find input file: %s.\n", INPUT_FILE);
 		return E_NOT_OK;
 	}
-	process_input(&shrimps);
+	process_input(&crabs);
 
-	fuel_needed = calculate_optimal_allignment(&shrimps, 'h');	//solution with human math
+	fuel_needed = calculate_optimal_allignment(&crabs, 'h');	//solution with human math
 	printf("result_1 = %lu\n", fuel_needed);
 
-	fuel_needed = calculate_optimal_allignment(&shrimps, 's');	//solution with shrimp math
+	fuel_needed = calculate_optimal_allignment(&crabs, 's');	//solution with shrimp math
 	printf("result_2 = %lu\n", fuel_needed);
 
     return E_OK;

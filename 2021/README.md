@@ -21,8 +21,11 @@
 - **Day06** - Predicting lanternfish population.\
 *Handling exponential growth and big numbers*
 
-- **Day07** - Coordinating shrimp submarines.\
+- **Day07** - Coordinating crab submarines.\
 *Finding middle of random series (linear & exponential method)*
 
-- **Day08** - 7 segment display problem.\
+- **Day08** - Seven-segment display problem.\
 *creating a decision tree based on input length and number of matching elements*
+
+- **Day09** - Basin mapping.\
+*deepest spot detection and recursive DFS area calculation on 2D plane*
