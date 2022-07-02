@@ -28,4 +28,7 @@
 *creating a decision tree based on input length and number of matching elements*
 
 - **Day09** - Basin mapping.\
-*deepest spot detection and recursive DFS area calculation on 2D plane*
+*Lowest value detection and recursive DFS area calculation on 2D plane*
+
+- **Day09** - Bracket correctness checking.\
+*Array based stack implementation*
