@@ -17,8 +17,8 @@
 #include "../Inc/std_types.h"
 
 #define INPUT_FILE			"..\\txt_inputs\\day_10.txt"
-#define NUMBER_OF_LINES		94		//number of rows in input txt 
-#define LENGTH_OF_LINES		130		//max line length in input txt
+#define NUMBER_OF_LINES		10		//number of rows in input txt 
+#define LENGTH_OF_LINES		30		//max line length in input txt
 char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
 
 #define PARANTHESES_POINTS	3
@@ -26,8 +26,10 @@ char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up
 #define CURLY_POINTS		1197
 #define ANGLE_POINTS		25137
 
-char stack[4096];
-uint16_t stack_cnt = 0;
+typedef struct {
+	char arr[4096];
+	uint16_t cnt;
+} char_stack_t;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,87 +53,82 @@ bool read_input(char* fileName)
 	return E_OK;
 }
 
-void push(char c)
+void push(char_stack_t *stack, char c)
 {
-	if(stack_cnt == 4096)
+	if(stack->cnt == 4096)
 	{
 		fprintf(stderr, "Stack overflow.\n");
 		return;
 	}
-	stack[stack_cnt] = c;
-	stack_cnt++;
+	
+	stack->arr[stack->cnt] = c;
+	stack->cnt++;
 }
 
-char pop()
+char pop(char_stack_t *stack)
 {
-	if(stack_cnt == 0)
+	if(stack->cnt == 0)
 	{
 		fprintf(stderr, "Stack underflow.\n");
 		return -1;
 	}
 
-	char c = stack[stack_cnt - 1];
-	stack_cnt--;
+	char c = stack->arr[stack->cnt - 1];
+	stack->cnt--;
 	return c;
 }
 
-void empty()
-{
-	while(stack_cnt > 0)
-	{
-		pop();
-	}
-}
 
-void print_stack()
+
+void print_stack(char_stack_t *stack)
 {
-	for(int i = 0; i < stack_cnt; i++)
+	for(int i = 0; i < stack->cnt; i++)
 	{
-		printf("%c",stack[i]);
+		printf("%c", stack->arr[i]);
 	}
 	printf("\n");
 }
 
-uint32_t count_corruption_score()
+uint32_t count_corruption_score(char_stack_t *stack)
 {
 	uint32_t corruption_score = 0;
-	uint16_t idx = 0;
 	bool corrupted = false;
-	empty();
 	for(uint16_t line = 0; line < NUMBER_OF_LINES; line++)
 	{
 		corrupted = false;
-		for(idx = 0; idx < LENGTH_OF_LINES; idx++)
+		stack->cnt = 0;
+		//printf("------------------\n");
+		for(uint16_t idx = 0; idx < strlen(txt[line]); idx++)
 		{
 			if(	txt[line][idx] == '(' ||
 				txt[line][idx] == '[' ||
 				txt[line][idx] == '{' ||
 				txt[line][idx] == '<')
 			{
-				push(txt[line][idx]);
+				push(stack, txt[line][idx]);
 			}
 			else
 			{
 				switch(txt[line][idx])
 				{
 					case ')':
-						corrupted = pop() != '(' ? true : false;
+						corrupted = pop(stack) != '(' ? true : false;
 						break;
 					case ']':
-						corrupted = pop() != '[' ? true : false;
+						corrupted = pop(stack) != '[' ? true : false;
 						break;
 					case '}':
-						corrupted = pop() != '{' ? true : false;
+						corrupted = pop(stack) != '{' ? true : false;
 						break;
 					case '>':
-						corrupted = pop() != '<' ? true : false;
+						corrupted = pop(stack) != '<' ? true : false;
 						break;
 					default:
 						break;
 				}
 			}
 			
-			//print_stack();
+			//print_stack(stack);
 
 			if(corrupted)
 			{
@@ -153,7 +150,7 @@ uint32_t count_corruption_score()
 					default:
 						break;
 				}
-
+				//printf("XXX\n");
 				break;
 			}
 		}
@@ -169,13 +166,15 @@ int main(int argc, char **argv)
 	uint32_t result_1 = 0;
 	uint32_t result_2 = 0;
 
+	char_stack_t stack = {{0},0};
+
 	if(read_input(INPUT_FILE))
 	{
 		printf("Error: could not find input file: %s.\n", INPUT_FILE);
 		return E_NOT_OK;
 	}
 
-	result_1 = count_corruption_score();
+	result_1 = count_corruption_score(&stack);
 
 	printf("result_1 = %lu\n", result_1);
 	printf("result_2 = %lu\n", result_2);
