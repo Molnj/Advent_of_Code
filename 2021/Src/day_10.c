@@ -18,13 +18,16 @@
 
 #define INPUT_FILE			"..\\txt_inputs\\day_10.txt"
 #define NUMBER_OF_LINES		94		//number of rows in input txt 
-#define LENGTH_OF_LINES		120		//max line length in input txt
+#define LENGTH_OF_LINES		130		//max line length in input txt
 char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
 
+#define PARANTHESES_POINTS	3
+#define SQUARE_POINTS		57
+#define CURLY_POINTS		1197
+#define ANGLE_POINTS		25137
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-//structure
+char stack[4096];
+uint16_t stack_cnt = 0;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,23 +51,115 @@ bool read_input(char* fileName)
 	return E_OK;
 }
 
-void process_input()//ADD PARAM
+void push(char c)
 {
-	char *token = NULL;
-	char *end = NULL;
-	int idx = 0;
-
-	/*
-	token = strtok(txt[0], ",");
-	while( token != NULL )
+	if(stack_cnt == 4096)
 	{
-		//uint8_t days_till_reproduction = strtol(token, &end, 10);
-		//fishes->fish_groups[days_till_reproduction]++;
-		//fishes->count++;
-		token = strtok(NULL, ",");
-		idx++;
+		fprintf(stderr, "Stack overflow.\n");
+		return;
 	}
-	*/
+	stack[stack_cnt] = c;
+	stack_cnt++;
+}
+
+char pop()
+{
+	if(stack_cnt == 0)
+	{
+		fprintf(stderr, "Stack underflow.\n");
+		return -1;
+	}
+
+	char c = stack[stack_cnt - 1];
+	stack_cnt--;
+	return c;
+}
+
+void empty()
+{
+	while(stack_cnt > 0)
+	{
+		pop();
+	}
+}
+
+void print_stack()
+{
+	for(int i = 0; i < stack_cnt; i++)
+	{
+		printf("%c",stack[i]);
+	}
+	printf("\n");
+}
+
+uint32_t count_corruption_score()
+{
+	uint32_t corruption_score = 0;
+	uint16_t idx = 0;
+	bool corrupted = false;
+	empty();
+	for(uint16_t line = 0; line < NUMBER_OF_LINES; line++)
+	{
+		corrupted = false;
+		for(idx = 0; idx < LENGTH_OF_LINES; idx++)
+		{
+			if(	txt[line][idx] == '(' ||
+				txt[line][idx] == '[' ||
+				txt[line][idx] == '{' ||
+				txt[line][idx] == '<')
+			{
+				push(txt[line][idx]);
+			}
+			else
+			{
+				switch(txt[line][idx])
+				{
+					case ')':
+						corrupted = pop() != '(' ? true : false;
+						break;
+					case ']':
+						corrupted = pop() != '[' ? true : false;
+						break;
+					case '}':
+						corrupted = pop() != '{' ? true : false;
+						break;
+					case '>':
+						corrupted = pop() != '<' ? true : false;
+						break;
+					default:
+						break;
+				}
+			}
+			
+			//print_stack();
+
+			if(corrupted)
+			{
+				char corrupt_char = txt[line][idx];
+				switch(corrupt_char)
+				{
+					case ')':
+						corruption_score += PARANTHESES_POINTS;
+						break;
+					case ']':
+						corruption_score += SQUARE_POINTS;
+						break;
+					case '}':
+						corruption_score += CURLY_POINTS;
+						break;
+					case '>':
+						corruption_score += ANGLE_POINTS;
+						break;
+					default:
+						break;
+				}
+
+				break;
+			}
+		}
+	}
+
+	return corruption_score;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,18 +169,16 @@ int main(int argc, char **argv)
 	uint32_t result_1 = 0;
 	uint32_t result_2 = 0;
 
-	//STRUCT
-
 	if(read_input(INPUT_FILE))
 	{
 		printf("Error: could not find input file: %s.\n", INPUT_FILE);
 		return E_NOT_OK;
 	}
-	process_input();//ADD PARAM
+
+	result_1 = count_corruption_score();
 
 	printf("result_1 = %lu\n", result_1);
 	printf("result_2 = %lu\n", result_2);
-
 
     return E_OK;
 }
