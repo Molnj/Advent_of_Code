@@ -30,5 +30,5 @@
 - **Day09** - Basin mapping.\
 *Lowest value detection and recursive DFS area calculation on 2D plane*
 
-- **Day09** - Bracket correctness checking.\
+- **Day10** - Bracket correctness checking.\
 *Array based stack implementation + sorting*
