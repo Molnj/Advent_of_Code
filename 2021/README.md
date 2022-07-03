@@ -25,10 +25,10 @@
 *Finding middle of random series (linear & exponential method)*
 
 - **Day08** - Seven-segment display problem.\
-*creating a decision tree based on input length and number of matching elements*
+*Creating a decision tree based on input length and number of matching elements*
 
 - **Day09** - Basin mapping.\
 *Lowest value detection and recursive DFS area calculation on 2D plane*
 
 - **Day09** - Bracket correctness checking.\
-*Array based stack implementation*
+*Array based stack implementation + sorting*

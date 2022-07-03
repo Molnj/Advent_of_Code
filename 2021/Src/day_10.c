@@ -17,8 +17,8 @@
 #include "../Inc/std_types.h"
 
 #define INPUT_FILE			"..\\txt_inputs\\day_10.txt"
-#define NUMBER_OF_LINES		10		//number of rows in input txt 
-#define LENGTH_OF_LINES		30		//max line length in input txt
+#define NUMBER_OF_LINES		94		//number of rows in input txt 
+#define LENGTH_OF_LINES		130		//max line length in input txt
 char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
 
 #define PARANTHESES_POINTS	3
@@ -26,32 +26,15 @@ char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up
 #define CURLY_POINTS		1197
 #define ANGLE_POINTS		25137
 
+const char openers[4] = {'(', '[', '{', '<'};
+const char closers[4] = {')', ']', '}', '>'};
+
+uint8_t corrupted_lines[NUMBER_OF_LINES];
+
 typedef struct {
 	char arr[4096];
 	uint16_t cnt;
 } char_stack_t;
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-bool read_input(char* fileName) 
-{
-	FILE *pFile = fopen(fileName, "r");
-	if (pFile == 0)
-	{
-		return E_NOT_OK;
-	}
-
-	// .TXT --> CHAR[row][column]
-	int i = 0;
-	while(fgets(txt[i], LENGTH_OF_LINES, pFile))
-	{
-		txt[i][strlen(txt[i]) - 1] = '\0';
-		i++;
-	}
-
-	fclose(pFile);
-	return E_OK;
-}
 
 void push(char_stack_t *stack, char c)
 {
@@ -78,8 +61,6 @@ char pop(char_stack_t *stack)
 	return c;
 }
 
-
-
 void print_stack(char_stack_t *stack)
 {
 	for(int i = 0; i < stack->cnt; i++)
@@ -89,74 +70,95 @@ void print_stack(char_stack_t *stack)
 	printf("\n");
 }
 
-uint32_t count_corruption_score(char_stack_t *stack)
-{
-	uint32_t corruption_score = 0;
-	bool corrupted = false;
-	for(uint16_t line = 0; line < NUMBER_OF_LINES; line++)
-	{
-		corrupted = false;
-		stack->cnt = 0;
-		//printf("------------------\n");
-		for(uint16_t idx = 0; idx < strlen(txt[line]); idx++)
-		{
-			if(	txt[line][idx] == '(' ||
-				txt[line][idx] == '[' ||
-				txt[line][idx] == '{' ||
-				txt[line][idx] == '<')
-			{
-				push(stack, txt[line][idx]);
-			}
-			else
-			{
-				switch(txt[line][idx])
-				{
-					case ')':
-						corrupted = pop(stack) != '(' ? true : false;
-						break;
-					case ']':
-						corrupted = pop(stack) != '[' ? true : false;
-						break;
-					case '}':
-						corrupted = pop(stack) != '{' ? true : false;
-						break;
-					case '>':
-						corrupted = pop(stack) != '<' ? true : false;
-						break;
-					default:
-						break;
-				}
-			}
-			
-			//print_stack(stack);
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
-			if(corrupted)
-			{
-				char corrupt_char = txt[line][idx];
-				switch(corrupt_char)
-				{
-					case ')':
-						corruption_score += PARANTHESES_POINTS;
-						break;
-					case ']':
-						corruption_score += SQUARE_POINTS;
-						break;
-					case '}':
-						corruption_score += CURLY_POINTS;
-						break;
-					case '>':
-						corruption_score += ANGLE_POINTS;
-						break;
-					default:
-						break;
-				}
-				//printf("XXX\n");
-				break;
-			}
-		}
+bool read_input(char* fileName) 
+{
+	FILE *pFile = fopen(fileName, "r");
+	if (pFile == 0)
+	{
+		return E_NOT_OK;
 	}
 
-	return corruption_score;
+	// .TXT --> CHAR[row][column]
+	int i = 0;
+	while(fgets(txt[i], LENGTH_OF_LINES, pFile))
+	{
+		txt[i][strlen(txt[i]) - 1] = '\0';
+		i++;
+	}
+
+	fclose(pFile);
+	return E_OK;
+}
+
+bool isOpener(char c)
+{
+	bool result = false;
+	for(int i = 0; i < sizeof(openers)/sizeof(openers[0]); i++)
+	{
+		if(c == openers[i])
+		{
+			result = true;
+		}
+	}
+	return result;
+}
+
+bool isCloser(char c)
+{
+	bool result = false;
+	for(int i = 0; i < sizeof(closers)/sizeof(closers[0]); i++)
+	{
+		if(c == closers[i])
+		{
+			result = true;
+		}
+	}
+	return result;
+}
+
+bool isCorrupted(char close, char open)
+{
+	bool result = false;
+	switch(close)
+	{
+		case ')':
+			result = open != '(' ? true : false;
+			break;
+		case ']':
+			result = open != '[' ? true : false;
+			break;
+		case '}':
+			result = open != '{' ? true : false;
+			break;
+		case '>':
+			result = open != '<' ? true : false;
+			break;
+		default:
+			break;
+	}
+	return result;
+}
+	//print_stack(stack);
+
+uint16_t addPoints(char c)
+{
+	switch(c)
+	{
+		case ')':
+			return PARANTHESES_POINTS;
+		case ']':
+			return SQUARE_POINTS;
+		case '}':
+			return CURLY_POINTS;
+		case '>':
+			return ANGLE_POINTS;
+		default:
+			break;
+	}
+
+	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,15 +168,39 @@ int main(int argc, char **argv)
 	uint32_t result_1 = 0;
 	uint32_t result_2 = 0;
 
-	char_stack_t stack = {{0},0};
-
 	if(read_input(INPUT_FILE))
 	{
 		printf("Error: could not find input file: %s.\n", INPUT_FILE);
 		return E_NOT_OK;
 	}
 
-	result_1 = count_corruption_score(&stack);
+	// part 1
+	char_stack_t stack = {{0},0};
+
+	for(uint16_t line = 0; line < NUMBER_OF_LINES; line++)
+	{
+		stack.cnt = 0;
+		for(uint16_t idx = 0; idx < strlen(txt[line]); idx++)
+		{
+			char c_curr = txt[line][idx];
+			if(isOpener(c_curr))
+			{
+				push(&stack, c_curr);
+			}
+			if(isCloser(c_curr))
+			{
+				char c_pair = pop(&stack);
+				if(isCorrupted(c_curr, c_pair))
+				{
+					result_1 += addPoints(c_curr);
+					//printf("xxx\n");
+					break;
+				}
+			}
+			//print_stack(&stack);
+		}
+		//printf("----------------\n");
+	}
 
 	printf("result_1 = %lu\n", result_1);
 	printf("result_2 = %lu\n", result_2);
