@@ -20,7 +20,7 @@
 #define INPUT_FILE			"..\\txt_inputs\\day_xx.txt"
 #define NUMBER_OF_LINES		500		//number of rows in input txt 
 #define LENGTH_OF_LINES		18		//max line length in input txt
-char txt[NUMBER_OF_LINES][LENGTH_OF_LINES];	//character matrix - to be filled up with input txt
+char txt[NUMBER_OF_LINES][LENGTH_OF_LINES+2];	//+2 for read input()'s +'\0'
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ bool read_input(char* fileName)
 
 	// .TXT --> CHAR[row][column]
 	int i = 0;
-	while(fgets(txt[i], LENGTH_OF_LINES, pFile))
+	while(fgets(txt[i], LENGTH_OF_LINES+2, pFile)) //+2 for '\0'
 	{
 		txt[i][strlen(txt[i]) - 1] = '\0';
 		i++;
