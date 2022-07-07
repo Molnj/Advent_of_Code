@@ -1,7 +1,7 @@
 /*
 	AUTHOR:		Molnar Mate
-	DATE:		2022.xx.xx.
-	INPUT FILE:	..\txt_inputs\day_XX.txt
+	DATE:		2022.07.05.
+	INPUT FILE:	..\txt_inputs\day_12.txt
 
 	####################################################################################################
 	AOC description
@@ -17,15 +17,24 @@
 #include <stdbool.h>
 #include "../Inc/std_types.h"
 
-#define INPUT_FILE			"..\\txt_inputs\\day_xx.txt"
-#define LINES		500		//number of rows in input txt 
-#define COLS		18		//max line length in input txt
+#define INPUT_FILE			"..\\txt_inputs\\day_12.txt"
+#define LINES		25		//number of rows in input txt 
+#define COLS		10		//max line length in input txt
 char txt[LINES][COLS+2];	//+2 for read input()'s +'\0'
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-//structure
+typedef struct
+{
+	char start[5];
+	char end[5];
+} way_t;
+
+typedef struct
+{
+	way_t ways[25];
+} cave_t;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,24 +58,33 @@ bool read_input(char* fileName)
 	return E_OK;
 }
 
-void process_input()//ADD PARAM
+void process_input(cave_t *cave)//ADD PARAM
 {
 	char *token = NULL;
-	char *end = NULL;
-/* 	
- 	for(int line = 0; line < 795; line++)
+	char delim[] = "-";
+
+	for(int line = 0; line < LINES; line++)
 	{
-		char *token = strtok(txt[line], ",");	//extract first token in line
-		//first token
-		while(token != NULL)					//extract all other tokens in line
+		token = strtok(txt[line], delim);
+		uint8_t cnt = 0;
+		while( token != NULL )
 		{
-			//next token
-			token = strtok(NULL, " ");
+			switch(cnt)
+			{
+				case 0:
+					strcpy(cave->ways[line].start, token);
+					break;
+				case 1:
+					strcpy(cave->ways[line].end, token);
+					break;
+				default:
+					break;
+			}
+			token = strtok(NULL, delim);
+			cnt++;
 		}
 	}
- */
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -75,14 +93,20 @@ int main(int argc, char **argv)
 	uint32_t result_1 = 0;
 	uint32_t result_2 = 0;
 
-	//STRUCT
+	cave_t cave = {{0,0}};
 
 	if(read_input(INPUT_FILE))
 	{
 		printf("Error: could not find input file: %s.\n", INPUT_FILE);
 		return E_NOT_OK;
 	}
-	process_input();//ADD PARAM
+	process_input(&cave);//ADD PARAM
+
+	for (int i = 0; i < 25; i++)
+	{
+		printf("-%s", cave.ways[i].start);
+		printf(" %s\n", cave.ways[i].end);
+	}
 
 	printf("result_1 = %lu\n", result_1);
 	printf("result_2 = %lu\n", result_2);
