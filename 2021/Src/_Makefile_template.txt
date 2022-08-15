@@ -1,0 +1,72 @@
+# https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
+# https://www.gnu.org/software/make/manual/make.html 
+
+# type "make" to use file --> see automated compilation steps in cmd ("make" without arguments runs the 1st command)
+# type "make clean" to remove object files from directory
+# special macros: "$@" and "$^", which are the left and right sides of the ":"
+
+# project contains "src", ("src/obj"), "inc" and "lib" folders
+# 	makefile and main shall be located in the src directory
+# 	.o files shall be generated in an "obj" subfolder ins "src"
+# 	.h files shall be located in the include directory
+# 	libraries shall be included in the lib directory
+
+
+# directory paths
+IDIR=../inc
+ODIR=obj
+LDIR=../lib
+
+# setting used compiler
+CC := gcc # GNU Compiler Collection
+
+# macro storing compiler flags
+CFLAGS += -I$(IDIR) # "" include path shall be: h_path --> ../inc/h_paht in .c file
+CFLAGS += -std=gnu99 # GNU version used
+CFLAGS += -I. # look for the .h files in the current directory (.)
+CFLAGS += -g # print debug informations
+CFLAGS += -Wall # print all warnings
+CFLAGS += -O4 # level 4 optimization
+
+# macro storing included libraries
+LIBS += -lm # math - just for shows
+
+# macro storing dependencies - ALL THE INCLUDE FILES (.h)
+_DEPS += linked_list.h
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+# macro storing objects - ALL THE OBJECT FILES (.o)
+_OBJ += linked_list.o
+_OBJ += linked_list_test.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+#CREATING .O FILES
+# rule: all .o files depend on the matching .c and .h (in DEPS)
+# 	-c 			== creates object file
+# 	-o $@		== put the output of the compilation in the file named on the left side of the :
+# 	$< 			== the first item in the dependencies list 
+#	$(CFLAGS)	== macro defined above
+$(ODIR)/%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+	
+
+# COMPILING .EXE
+# compilation rule (1st rule)
+#	$(CC)		== use compiler defined in CC (gcc)
+#	-c			== create object files
+#	-o $@		== output (.exe) shall be named whatever is to the left of ":" in the rule ("output")
+# 	$^			== whatever is left to the ":" in rule --> $(OBJ) --> linked_list.o linked_list_test.o
+#	#(CFLAGS)	== macro defined above
+#	#(LIBS)		== macro defined above
+out : $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+
+# stop make from messing with files named "clean"
+.PHONY : clean
+# clear directory
+clean :
+	@echo "Cleaning up..."
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
