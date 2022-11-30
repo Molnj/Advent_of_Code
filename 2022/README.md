@@ -1,6 +1,6 @@
-# Advent of Code 2022 challenge
+# 🎄 Advent of Code 2022 challenge 🎄
 
-### Python🐍 solution for AOC-2022🎄
+### Written in **Python**🐍
 ✨[https://adventofcode.com/2022]✨
 
 
