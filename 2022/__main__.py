@@ -7,3 +7,4 @@ from Src import day01, day02
 if __name__ == "__main__":
     day01.main()
     day02.main()
+
