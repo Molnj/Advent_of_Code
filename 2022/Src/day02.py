@@ -49,7 +49,8 @@ def part2(txt: str) -> None:
     print(f"day02 part2 answer is: {point_cnt}")
 
 
-if __name__ == "__main__":
+def main():
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)
+    print("#################################")

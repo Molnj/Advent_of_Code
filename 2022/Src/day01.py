@@ -39,6 +39,8 @@ def part2():
     print(f"day01 part2 answer is: {top3_sum}")
 
 
-if __name__ == "__main__":
+def main():
+    print("#################################")
     part1()
     part2()
+    print("#################################")
