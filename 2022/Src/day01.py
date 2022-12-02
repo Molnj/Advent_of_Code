@@ -2,7 +2,7 @@ import os
 
 file_dir = os.path.dirname(os.path.realpath('__file__'))
 file_name = os.path.join(file_dir, '../txt_inputs/day01.txt')
-file_name = os.path.abspath(os.path.realpath(file_name))
+file_name = os.path.abspath(os.path.realpath(file_name)) 
 
 
 def read_file(file_name):
@@ -10,7 +10,7 @@ def read_file(file_name):
         contents = file.readlines()
     return contents
     
-    
+
 def part1():
     max_kcal = 0
     curr_val = 0;
