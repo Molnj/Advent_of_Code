@@ -12,7 +12,7 @@ def read_file(file_path: str) -> str:
 
     
 def part1(txt: str) -> None:
-    point_cnt = 0
+    score = 0
     results = {    # points for outcome + points for shape
         "A X": 3+1,
         "A Y": 6+2,
@@ -26,12 +26,12 @@ def part1(txt: str) -> None:
     }
     for line in txt:
         line = line.strip()
-        point_cnt += results[line]
-    print(f"day02 part1 answer is: {point_cnt}")
+        score += results[line]
+    print(f"day02 part1 answer is: {score}")
 
 
 def part2(txt: str) -> None:
-    point_cnt = 0
+    score = 0
     results = {    # points for outcome + points for shape
         "A X": 0+3,
         "A Y": 3+1,
@@ -45,8 +45,8 @@ def part2(txt: str) -> None:
     }
     for line in txt:
         line = line.strip()
-        point_cnt += results[line]
-    print(f"day02 part2 answer is: {point_cnt}")
+        score += results[line]
+    print(f"day02 part2 answer is: {score}")
 
 
 def main():
