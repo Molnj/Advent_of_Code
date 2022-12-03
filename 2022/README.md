@@ -12,5 +12,5 @@
 *Calculate resulting score of (enemy shape - player shape) pairs*
 *Calculate resulting score of (enemy shape - match outcome) pairs*
 
-- **Day02** - ??? .\
+- **Day03** - ??? .\
 
