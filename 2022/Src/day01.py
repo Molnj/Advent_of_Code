@@ -17,7 +17,7 @@ def part1():
     for line in read_file(file_name):
         line = line.strip()
         if len(line) != 0:
-            curr_val += int(line) 
+            curr_val += int(line)
         else:
             if curr_val > max_kcal:
                 max_kcal = curr_val
