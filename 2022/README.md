@@ -12,5 +12,10 @@
 *Calculate resulting score of (enemy shape - player shape) pairs*
 *Calculate resulting score of (enemy shape - match outcome) pairs*
 
-- **Day03** - ?????? .\
+- **Day03** - Backpack sorting .\
+*Find the one element that is present in both halves of strings* 
+*Find the one element that is present in groups of strings of 3* 
 
+- **Day04** - Cleaning optimization .\
+*Find section pairs (a-b,x-z) which form subsets* 
+*Find section pairs (a-b,x-z) which have intersections* 
