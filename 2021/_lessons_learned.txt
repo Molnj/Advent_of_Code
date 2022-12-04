@@ -1,0 +1,91 @@
+Lessons Learned - AOC-2021 [C]
+
+DAY-1:
+	* storing txt input in array of integers (atoi() - though I shouldn't use it)
+	
+DAY-2:
+	* STRUCT & ENUM
+	* enum = 0,1,2,... számok elnevezve --y olvashatóbb kód. benne a nevek nem stringek, hanem intek.
+	* storing txt input in array of strings - then splitting them up by ws
+	* how to break a string up by (whitespace) delimiter
+	* don't forget that: '' is for char "" is for str
+	* char --> int:		char a = '4';	int ia = a - '0';
+	
+DAY-3:
+	* storing txt input in matrix of integers (using ASCII - better way in day 4)
+	* 0-9 chars can be converted by substracting '0' --> '3' - '0' = 51 - 48 = 3
+	* removing the less frequent parts repeatedly can delete the last remaining option
+	* You need to pass a pointer with as much levels of indirection (*) as the number of dimensions of your matrix.
+		For example, if your matrix is 2D (e.g. 10 by 100), then:
+			void ins (int **matrix, int row, int column);
+		If you have a fixed dimension (e.g. 100), you can also do:
+			void ins (int (*matrix)[100], int row, int column);
+		If both your dimensions are fixed:
+			void ins (int matrix[10][100], int row, int column);
+	
+DAY-4:
+	* better way to handle txt input with C (txt -> char matrix)
+	* even better way implemented in day2:     while (!feof(pFile)) {fscanf(pFile, "%s %d\n", dir_str, &dist); ...
+	
+DAY-5:
+	*
+	
+DAY-6:
+	*
+	
+DAY-7:
+	*
+	
+DAY-8:
+	*
+	
+DAY-9:
+	*
+	
+DAY-10:
+	*
+	
+DAY-11:
+	*
+	
+DAY-12:
+	*
+	
+DAY-13:
+	*
+	
+DAY-14:
+	*
+	
+DAY-15:
+	*
+	
+DAY-16:
+	*
+	
+DAY-17:
+	*
+	
+DAY-18:
+	*
+	
+DAY-19:
+	*
+	
+DAY-20:
+	*
+	
+DAY-21:
+	*
+	
+DAY-22:
+	*
+	
+DAY-23:
+	*
+	
+DAY-24:
+	*
+	
+DAY-25:
+	*
