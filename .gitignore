@@ -39,3 +39,5 @@ Thumbs.db
 # Custom #
 ############
 _lessons_learned.txt
+.vscode
+.idea
