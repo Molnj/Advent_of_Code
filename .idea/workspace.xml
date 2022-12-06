@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="306fd276-9f1a-4baf-8510-ff68ec41b284" name="Default Changelist" comment="day04">
-      <change afterPath="$PROJECT_DIR$/2022/Src/day06.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2022/txt_inputs/day06.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2022/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/2022/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2022/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/2022/__main__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
