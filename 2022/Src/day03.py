@@ -1,7 +1,7 @@
 import os
 
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-file_name = os.path.join(file_dir, '../2022/txt_inputs/day03.txt')
+file_name = os.path.join(file_dir, '../txt_inputs/day03.txt')
 file_name = os.path.abspath(os.path.realpath(file_name))
 
 

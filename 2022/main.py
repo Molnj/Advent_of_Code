@@ -3,7 +3,7 @@ import sys
 
 sys.path.insert(0, '/the/folder/path/name-package/')
 
-from Src import day01, day02, day03, day04, day05, day06
+from Src import day01, day02, day03, day04, day05, day06, day07
 
 if __name__ == "__main__":
     day01.main()
@@ -12,3 +12,4 @@ if __name__ == "__main__":
     day04.main()
     day05.main()
     day06.main()
+    day07.main()
