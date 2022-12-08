@@ -30,7 +30,7 @@ def part1(txt: list[str]) -> None:
         section2 = expand_section(section2)
         if section1.issubset(section2) or section2.issubset(section1):
             subset_cnt += 1
-    print(f"day04 part1 answer is: {subset_cnt}")
+    print(f"#\tday04 part1 answer is: {subset_cnt}\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
@@ -41,11 +41,11 @@ def part2(txt: list[str]) -> None:
         section2 = expand_section(section2)
         if bool(section1 & section2):
             intersection_cnt += 1
-    print(f"day04 part2 answer is: {intersection_cnt}")
+    print(f"#\tday04 part2 answer is: {intersection_cnt}\t\t\t#")
 
 
 def main():
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)
-    print("#################################")
+    print("#########################################")

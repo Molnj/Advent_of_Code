@@ -22,7 +22,7 @@ def part1():
             if curr_val > max_kcal:
                 max_kcal = curr_val
             curr_val = 0
-    print(f"day01 part1 answer is: {max_kcal}")
+    print(f"#\tday01 part1 answer is: {max_kcal}\t\t#")
 
 
 def part2():
@@ -36,11 +36,10 @@ def part2():
             kcal_list.append(curr_val)
             curr_val = 0
     top3_sum = sum(sorted(kcal_list, reverse=True)[:3])
-    print(f"day01 part2 answer is: {top3_sum}")
+    print(f"#\tday01 part2 answer is: {top3_sum}\t\t#")
 
 
 def main():
-    print("#################################")
     part1()
     part2()
-    print("#################################")
+    print("#########################################")
