@@ -25,7 +25,7 @@ def part1(txt: list[str]) -> int:
         if len(sliding_window) == 4:
             break
         idx += 1
-    print(f"#\tday06 part1 answer is: {idx+1}\t\t\t#")
+    print(f"#\tday06 part1 answer is: {idx+1}\t\t\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
@@ -42,11 +42,11 @@ def part2(txt: list[str]) -> None:
         if len(sliding_window) == 14:
             break
         idx += 1
-    print(f"#\tday06 part2 answer is: {idx+1}\t\t\t#")
+    print(f"#\tday06 part2 answer is: {idx+1}\t\t\t\t\t#")
 
 
 def main():
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)
-    print("#########################################")
+    print("#################################################")

@@ -25,7 +25,7 @@ def part1(txt: list[str]) -> None:
         comp2 = line[len(line) // 2:]
         matching_char = (str(set(comp1) & set(comp2)))[2]   # only finds 1st matching char, but shouldn't be more anyway
         priority_sum += get_char_priority(matching_char)
-    print(f"#\tday03 part1 answer is: {priority_sum}\t\t\t#")
+    print(f"#\tday03 part1 answer is: {priority_sum}\t\t\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
@@ -38,11 +38,11 @@ def part2(txt: list[str]) -> None:
                 priority_sum += get_char_priority(char)
                 break
         i += 3
-    print(f"#\tday03 part2 answer is: {priority_sum}\t\t\t#")
+    print(f"#\tday03 part2 answer is: {priority_sum}\t\t\t\t\t#")
 
 
 def main():
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)
-    print("#########################################")
+    print("#################################################")

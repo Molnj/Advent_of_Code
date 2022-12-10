@@ -27,7 +27,7 @@ def part1(txt: str) -> None:
     for line in txt:
         line = line.strip()
         score += results[line]
-    print(f"#\tday02 part1 answer is: {score}\t\t#")
+    print(f"#\tday02 part1 answer is: {score}\t\t\t\t#")
 
 
 def part2(txt: str) -> None:
@@ -46,11 +46,11 @@ def part2(txt: str) -> None:
     for line in txt:
         line = line.strip()
         score += results[line]
-    print(f"#\tday02 part2 answer is: {score}\t\t#")
+    print(f"#\tday02 part2 answer is: {score}\t\t\t\t#")
 
 
 def main():
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)
-    print("#########################################")
+    print("#################################################")

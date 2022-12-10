@@ -58,7 +58,7 @@ def part1(txt: list[str]) -> None:
     stacks = create_stacks(lines)                   # create stacks
     move_crates(lines, stacks, False)               # move stack items
     result = get_top_crates(stacks)                 # get result (string of top item letters)
-    print(f"#\tday05 part1 answer is: {result}\t#")
+    print(f"#\tday05 part1 answer is: {result}\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
@@ -66,11 +66,11 @@ def part2(txt: list[str]) -> None:
     stacks = create_stacks(lines)                   # create stacks
     move_crates(lines, stacks, True)                # move stack items
     result = get_top_crates(stacks)                 # get result (string of top item letters)
-    print(f"#\tday05 part2 answer is: {result}\t#")
+    print(f"#\tday05 part2 answer is: {result}\t\t\t#")
 
 
 def main():
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)
-    print("#########################################")
+    print("#################################################")

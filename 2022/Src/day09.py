@@ -65,7 +65,7 @@ def part1(moves: list[str], rope_len: int) -> None:
         for i in temp:
             if i not in tail_positions:
                 tail_positions.append(i)
-    print(f"#\t{cur_day} part1 answer is: {len(tail_positions)}\t\t\t#")
+    print(f"#\t{cur_day} part1 answer is: {len(tail_positions)}\t\t\t\t\t#")
 
 
 def part2(moves: list[str], rope_len: int) -> None:
@@ -76,11 +76,11 @@ def part2(moves: list[str], rope_len: int) -> None:
         for i in temp:
             if i not in tail_positions:
                 tail_positions.append(i)
-    print(f"#\t{cur_day} part2 answer is: {len(tail_positions)}\t\t\t#")
+    print(f"#\t{cur_day} part2 answer is: {len(tail_positions)}\t\t\t\t\t#")
 
 
 def main():
     move_list = read_file(input_path)
     part1(move_list, 2)
     part2(move_list, 10)
-    print("#########################################")
+    print("#################################################")

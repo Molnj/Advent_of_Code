@@ -143,7 +143,7 @@ def part1(forest: list[list[int]]) -> None:
             x += 1
         x = 0
         y += 1
-    print(f"#\t{cur_day} part1 answer is: {visible_tree_num}\t\t\t#")
+    print(f"#\t{cur_day} part1 answer is: {visible_tree_num}\t\t\t\t\t#")
 
 
 def part2(forest: list[list[int]]) -> None:
@@ -159,7 +159,7 @@ def part2(forest: list[list[int]]) -> None:
             x += 1
         x = 0
         y += 1
-    print(f"#\t{cur_day} part2 answer is: {top_scenic_score}\t\t#")
+    print(f"#\t{cur_day} part2 answer is: {top_scenic_score}\t\t\t\t#")
 
 
 def main():
@@ -168,4 +168,4 @@ def main():
     # print_matrix(forest)
     part1(matrix)
     part2(matrix)
-    print("#########################################")
+    print("#################################################")

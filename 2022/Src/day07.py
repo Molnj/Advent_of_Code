@@ -95,7 +95,7 @@ def part1() -> None:
     for size in dir_sizes:
         if size < 100000:
             solution += size
-    print(f"#\tday07 part1 answer is: {solution}\t\t#")
+    print(f"#\tday07 part1 answer is: {solution}\t\t\t\t#")
 
 
 def part2(root: Directory) -> None:
@@ -109,7 +109,7 @@ def part2(root: Directory) -> None:
         if size >= space_to_be_deleted:
             solution = size
             break
-    print(f"#\tday07 part2 answer is: {solution}\t\t#")
+    print(f"#\tday07 part2 answer is: {solution}\t\t\t\t#")
 
 
 def main():
@@ -118,4 +118,4 @@ def main():
     get_dir_sizes(root)
     part1()
     part2(root)
-    print("#########################################")
+    print("#################################################")
