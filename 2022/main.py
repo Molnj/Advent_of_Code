@@ -5,7 +5,7 @@ import time
 start_time = time.time()
 sys.path.insert(0, '/the/folder/path/name-package/')
 
-from Src import day01, day02, day03, day04, day05, day06, day07, day08
+from Src import day01, day02, day03, day04, day05, day06, day07, day08, day09
 
 if __name__ == "__main__":
     print("#########################################")
@@ -20,5 +20,6 @@ if __name__ == "__main__":
     day06.main()
     day07.main()
     day08.main()
-    print(f"#\tComplete execution time: {(time.time() - start_time):.4} s\t#")
+    day09.main()
+    print(f"#\tComplete execution time: {((time.time() - start_time)*1000):.2f} ms\t#")
     print("#########################################")
