@@ -19,7 +19,7 @@ class Color:
     END = '\033[0m'
 
 
-from Src import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
+from Src import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11
 
 if __name__ == "__main__":
     print("#################################################")
@@ -36,6 +36,7 @@ if __name__ == "__main__":
     day08.main()
     day09.main()
     day10.main()
+    day11.main()
 
     elapsed_time_ms = (time.time() - start_time) * 1000
     print("#" + Color.GREEN + Color.BOLD + ("\t" * 3) + "Complete execution time:" + ("\t" * 3) + Color.END + "#")

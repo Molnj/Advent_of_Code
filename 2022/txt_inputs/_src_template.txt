@@ -1,0 +1,29 @@
+import os
+
+cur_day = os.path.basename(__file__)[:-3]
+file_dir = os.path.dirname(os.path.realpath('__file__'))
+input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
+input_path = os.path.abspath(os.path.realpath(input_path))
+
+
+def read_file(file_path: str) -> list[str]:
+    with open(file_path, "r+") as file:
+        contents = [line.rstrip('\n') for line in file]
+    return contents
+
+
+def part1(txt: list[str]) -> None:
+
+    print(f"#\t{cur_day} part1 answer is: {0}\t\t\t\t\t#")
+
+
+def part2(txt: list[str]) -> None:
+
+    print(f"#\t{cur_day} part2 answer is: {0}\t\t\t\t\t\t#")
+
+
+def main():
+    txt = read_file(input_path)
+    part1(txt)
+    part2(txt)
+    print("#################################################")
