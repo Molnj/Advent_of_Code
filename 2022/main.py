@@ -36,8 +36,7 @@ if __name__ == "__main__":
     day13.main()
     day14.main()
     day15.main()
-    day 16.main()
-    """
+    day 16.main()"""
     day17.main()
     elapsed_time_ms = (time.time() - start_time) * 1000
     print("#" + GREEN + BOLD + ("\t" * 3) + "Complete execution time:" + ("\t" * 3) + END + "#")

@@ -1,7 +1,7 @@
 # 🎄 Advent of Code 2022 challenge 🎄
 
 ### Written in **Python**🐍
-
+___
 ✨ https://adventofcode.com/2022 ✨
 ___
 -   **Day01** - Calorie Counting
@@ -29,14 +29,14 @@ ___
     -   *Check element uniqueness in sliding-window of 14*
 ___
 -   **Day07** - No Space Left On Device 
-    -   *Create directory tree and determine specifiy directory sizes*
-    -   *Determine smallest directory, whose deletion would still free up enough space*
+    -   *Create directory tree and determine specif y directory sizes*
+    -   *Determine the smallest directory, whose deletion would still free up enough space*
 ___
 -   **Day08** - Treetop treehouse
     -   *Determine number of trees visible from outside in a forest (height) grid*
     -   *Determine from which tree's top are the most trees visible in the forest*
 ___
--   **Day09** -   
+-   **Day09** - 
     -   **
     -   **
 ___
@@ -59,7 +59,7 @@ ___
 -   **Day14** - 
     -   **
     -   **
-___  
+___
 -   **Day15** - 
     -   **
     -   **
@@ -67,10 +67,10 @@ ___
 -   **Day16** - 
     -   **
     -   **
-___  
+___
 -   **Day17** -   
     -   **
     -   **
-___  
+___
 ###### MM
 
