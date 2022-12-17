@@ -119,7 +119,7 @@ def part2(grid: list[list[int]]) -> None:
     step_num_min = len(grid) * len(grid[0])
     starting_pos = get_starting_pos(grid, end_val)
     step_num = BFS_2(grid, starting_pos)
-    print(f"#\t{cur_day} part2 answer is: '{step_num}'\t\t\t\t#")
+    print(f"#\t{cur_day} part2 answer is: {step_num}\t\t\t\t\t#")
 
 
 def main():

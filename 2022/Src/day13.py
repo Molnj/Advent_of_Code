@@ -47,7 +47,6 @@ def bubble_sort(arr: list[list[int]]) -> list[list[int]]:
     while len(arr) > 1:
         temp = [arr[0]]
         i = 1
-        print("--------------------")
         while i < len(arr):
             # print(f"{temp[0]} ---- {arr[i]}")
             comp = compare(temp[0], arr[i])
@@ -76,12 +75,12 @@ def part2(pairs: list[list[int]]) -> None:
         items.append(pair[1])
     items = bubble_sort(items)  # should be quick sort, but it's getting late
     for idx, i in enumerate(items):
-        print(idx+1, i)
+        # print(idx+1, i)
         if i == [[2]]:
             distress_signal *= (idx+1)
         if i == [[6]]:
             distress_signal *= (idx+1)
-    print(f"#\t{cur_day} part2 answer is: {distress_signal}\t\t\t\t\t\t#")
+    print(f"#\t{cur_day} part2 answer is: {distress_signal}\t\t\t\t#")
 
 
 def main():

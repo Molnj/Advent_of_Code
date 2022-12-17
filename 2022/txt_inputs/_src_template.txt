@@ -19,11 +19,14 @@ def part1(txt: list[str]) -> None:
 
 def part2(txt: list[str]) -> None:
 
-    print(f"#\t{cur_day} part2 answer is: {0}\t\t\t\t\t\t#")
+    print(f"#\t{cur_day} part2 answer is: {0}\t\t\t\t\t#")
 
 
 def main():
-    txt = read_file(input_path)
-    part1(txt)
-    part2(txt)
+    lines = read_file(input_path)
+    map = xyz(lines)
+    map1 = map.copy()
+    map2 = map.copy()
+    part1(map1)
+    #part2(map2)
     print("#################################################")

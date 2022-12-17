@@ -2,31 +2,23 @@
 import sys
 import time
 
-from Src import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, \
-    day11, day12, day13, day14
+from Src import day01, day02, day03, day04, day05, day06, day07, \
+                day08, day09, day10, day11, day12, day13, day14, \
+                day15, day16, day17
 
 
 start_time = time.time()
 sys.path.insert(0, '/the/folder/path/name-package/')
 
-
-class Color:
-    PURPLE = '\033[95m'
-    CYAN = '\033[96m'
-    DARKCYAN = '\033[36m'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    END = '\033[0m'
+GREEN = '\033[92m'
+BOLD = '\033[1m'
+END = '\033[0m'
 
 
 if __name__ == "__main__":
     print("#################################################")
-    print("#" + Color.GREEN + Color.BOLD + "\t\t\t  ADVENT OF CODE - 2022\t\t\t\t" + Color.END + "#")
-    print("#" + Color.GREEN + Color.BOLD + "\t\t\t\t Python Solution\t\t\t\t" + Color.END + "#")
+    print("#" + GREEN + BOLD + "\t\t\t  ADVENT OF CODE - 2022\t\t\t\t" + END + "#")
+    print("#" + GREEN + BOLD + "\t\t\t\t Python Solution\t\t\t\t" + END + "#")
     print("#################################################")
     """
     day01.main()
@@ -42,10 +34,12 @@ if __name__ == "__main__":
     day11.main()
     day12.main()
     day13.main()
-    """
     day14.main()
-
+    day15.main()
+    day 16.main()
+    """
+    day17.main()
     elapsed_time_ms = (time.time() - start_time) * 1000
-    print("#" + Color.GREEN + Color.BOLD + ("\t" * 3) + "Complete execution time:" + ("\t" * 3) + Color.END + "#")
-    print("#" + Color.GREEN + Color.BOLD + "\t" * 5 + f"{elapsed_time_ms:.3f} ms" + "\t" * 5 + Color.END + "#")
+    print("#" + GREEN + BOLD + ("\t" * 3) + "Complete execution time:" + ("\t" * 3) + END + "#")
+    print("#" + GREEN + BOLD + "\t" * 5 + f"{elapsed_time_ms:.2f} ms" + "\t" * 5 + END + "#")
     print("#################################################")
