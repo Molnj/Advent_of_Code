@@ -5,19 +5,19 @@
 ✨ https://adventofcode.com/2022 ✨
 
 
-- **Day01** \- Calorie Counting  
-  - *Find the elf carrying the most calories*
-  - *Find the 3 elves carrying the most calories*
+-   **Day01** \- Calorie Counting  
+  -   *Find the elf carrying the most calories*
+  -   *Find the 3 elves carrying the most calories*
 
 
-- **Day02** \- Rock Paper Scissors
-  - *Calculate resulting score of (enemy shape - player shape) pairs*
-  - *Calculate resulting score of (enemy shape - match outcome) pairs*
+**Day02** \- Rock Paper Scissors
+-   *Calculate resulting score of (enemy shape - player shape) pairs*
+-   *Calculate resulting score of (enemy shape - match outcome) pairs*
 
 
-- **Day03** \- Rucksack Reorganization  
-  - *Find the one element that is present in both halves of strings*
-  - *Find the one element that is present in groups of strings of 3*
+-   **Day03** \- Rucksack Reorganization  
+    -   *Find the one element that is present in both halves of strings*
+    -   *Find the one element that is present in groups of strings of 3*
 
 
 - **Day04** \- Camp Cleanup  
