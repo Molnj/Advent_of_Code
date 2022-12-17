@@ -5,7 +5,7 @@
 ✨ https://adventofcode.com/2022 ✨
 
 
--   **Day01** - Calorie Counting  
+-   **Day01** - Calorie Counting
     -   *Find the elf carrying the most calories*
     -   *Find the 3 elves carrying the most calories*
 
@@ -33,4 +33,58 @@
 -   **Day06** - Tuning Trouble
     -   *Check element uniqueness in sliding-window of 4*
     -   *Check element uniqueness in sliding-window of 14*
+  
+
+-   **Day07** - No Space Left On Device 
+    -   *Create directory tree and determine specifiy directory sizes*
+    -   *Determine smallest directory, whose deletion would still free up enough space*
+
+
+-   **Day08** - Treetop treehouse
+    -   *Determine number of trees visible from outside in a forest (height) grid*
+    -   *Determine from which tree's top are the most trees visible in the forest*
+
+
+-   **Day09** -   
+    -   **
+    -   **
+
+
+-   **Day10** -  
+    -   **
+    -   **
+  
+
+-   **Day11** - 
+    -   **
+    -   **
+
+
+-   **Day12** - 
+    -   **
+    -   **
+  
+-   **Day13** -  
+    -   **
+    -   **
+
+
+-   **Day14** - 
+    -   **
+    -   **
+  
+
+-   **Day15** - 
+    -   **
+    -   **
+
+
+-   **Day16** - 
+    -   **
+    -   **
+
+
+-   **Day17** -   
+    -   **
+    -   **
   
