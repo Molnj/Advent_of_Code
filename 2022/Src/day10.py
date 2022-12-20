@@ -1,3 +1,10 @@
+"""
+AOC 2022 day10 - Cathode-Ray Tube
+    [ https://adventofcode.com/2022/day/10 ]
+    - pt1: 13060
+    - pt2: FJUBULRZ
+"""
+
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
@@ -7,12 +14,14 @@ input_path = os.path.abspath(os.path.realpath(input_path))
 
 
 def read_file(file_path: str) -> list[str]:
-    with open(file_path, "r+") as file:
+    """ parse input txt line-by-line into list of strings """
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
     return contents
 
 
 def calc_sig_str(elapsed_cycles, x_reg):
+    """ signal strength = elapsed_cycles * x_reg position"""
     signal_strength = 0
     if elapsed_cycles % 40 == 20:
         signal_strength = elapsed_cycles * x_reg
@@ -21,16 +30,19 @@ def calc_sig_str(elapsed_cycles, x_reg):
 
 
 def calc_crt_pixel(elapsed_cycles: int, x_reg: int) -> str:
+    """ draw pixel if current pinter and crt pointer are intersecting, else pass """
     pixel = ' '
     cur_row = (elapsed_cycles % 40) - 1
     if abs(cur_row - x_reg) <= 1:
         pixel = '█'
     if elapsed_cycles % 40 == 0:
-        pixel = " \t#\n#\t"     # elapsed_cycles start at 1, so whitespace override is necessary at 40
+        # elapsed_cycles start at 1, so whitespace override is necessary at 40
+        pixel = " \t#\n#\t"
     return pixel
 
 
 def part1(instructions: list[str]) -> None:
+    """ part 1 solution """
     signal_strength_sum = 0
     elapsed_cycles = 1
     x_reg = 1
@@ -49,6 +61,7 @@ def part1(instructions: list[str]) -> None:
 
 
 def part2(instructions: list[str]) -> None:
+    """ part 2 solution """
     crt_screen = "#\t"
     elapsed_cycles = 1
     x_reg = 1
@@ -66,6 +79,7 @@ def part2(instructions: list[str]) -> None:
 
 
 def main():
+    """ day10 main """
     instructions = read_file(input_path)
     part1(instructions)
     part2(instructions)

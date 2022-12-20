@@ -8,7 +8,7 @@
 """
 import sys
 import time
-from Src import day17
+from src import day18
 
 start_time = time.time()
 sys.path.insert(0, '/the/folder/path/name-package/')
@@ -39,7 +39,8 @@ if __name__ == "__main__":
     # day14.main()
     # day15.main()
     # day16.main()
-    day17.main()
+    # day17.main()
+    day18.main()
     elapsed_time_ms = (time.time() - start_time) * 1000
     print("#" + GREEN + BOLD + ("\t" * 3) + "Complete execution time:" + ("\t" * 3) + END + "#")
     print("#" + GREEN + BOLD + "\t" * 5 + f"{elapsed_time_ms:.2f} ms" + "\t" * 5 + END + "#")

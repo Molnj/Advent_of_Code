@@ -1,3 +1,10 @@
+"""
+AOC 2022 day03 - Rucksack Reorganization
+    [ https://adventofcode.com/2022/day/3 ]
+    - pt1: 7872
+    - pt2: 2497
+"""
+
 import os
 
 file_dir = os.path.dirname(os.path.realpath('__file__'))
@@ -6,29 +13,33 @@ file_name = os.path.abspath(os.path.realpath(file_name))
 
 
 def read_file(file_path: str) -> list[str]:
-    with open(file_path, "r+") as file:
+    """ parse input txt line-by-line into list of strings """
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = file.readlines()
     return contents
 
 
 def get_char_priority(char: str) -> int:
+    """ converting lower- and upper-case letters into ASCII value --> priority """
     if char.islower():
         return ord(char) - 96
-    else:
-        return ord(char) - 38
+    return ord(char) - 38
 
 
 def part1(txt: list[str]) -> None:
+    """ part 1 solution """
     priority_sum = 0
     for line in txt:
         comp1 = line[:len(line) // 2]
         comp2 = line[len(line) // 2:]
-        matching_char = (str(set(comp1) & set(comp2)))[2]   # only finds 1st matching char, but shouldn't be more anyway
+        # matching_char only finds 1st matching char, but shouldn't be more anyway
+        matching_char = (str(set(comp1) & set(comp2)))[2]
         priority_sum += get_char_priority(matching_char)
     print(f"#\tday03 part1 answer is: {priority_sum}\t\t\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
+    """ part 2 solution """
     priority_sum = 0
     list_of_lines = [line.strip() for line in txt]
     i = 0
@@ -42,6 +53,7 @@ def part2(txt: list[str]) -> None:
 
 
 def main():
+    """ day03 main """
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)

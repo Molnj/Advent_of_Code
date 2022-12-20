@@ -17,8 +17,8 @@ ___
     -   *Find the one element that is present in groups of strings of 3*
 ___
 -   **Day04** - Camp Cleanup  
-    -   *Find section pairs (a\-b,x\-z) which form subsets*
-    -   *Find section pairs (a\-b,x\-z) which have intersections*
+    -   *Find section pairs (a-b,x-z) which form subsets*
+    -   *Find section pairs (a-b,x-z) which have intersections*
 ___
 -   **Day05** - Supply Stacks 
     -   *Moving crates between stacks \[on-by-one\]*
@@ -29,46 +29,54 @@ ___
     -   *Check element uniqueness in sliding-window of 14*
 ___
 -   **Day07** - No Space Left On Device 
-    -   *Create directory tree and determine specif y directory sizes*
+    -   *Create directory tree and determine specify directory sizes*
     -   *Determine the smallest directory, whose deletion would still free up enough space*
 ___
--   **Day08** - Treetop treehouse
+-   **Day08** - Treetop Treehouse
     -   *Determine number of trees visible from outside in a forest (height) grid*
     -   *Determine from which tree's top are the most trees visible in the forest*
 ___
--   **Day09** - 
+-   **Day09** - Rope Bridge
+    -   *Simulate movement of rope with length of 2*
+    -   *Simulate movement of rope with length of 10*
+___
+-   **Day10** - Cathode-Ray Tube
+    -   *Calculate signal strength (based on addx xy sums and current cycle num)*
+    -   *Calculate movement of CRT pointer and places where it "draws -> What's the output on screen?*
+___
+-   **Day11** - Monkey in the Middle
+    -   *monkeys passing around your items between each other based on your worry level - predict the item movement*
+    -   *same task, but with gigantic numbers --> modulo arithmetic required*
+___
+-   **Day12** - Hill Climbing Algorithm
+    -   *find the shortest path to the top of the mountain, with a max step steepness of 1*
+    -   *find the shortest path from the top of the mountain to the nearest point with a height of 1*
+___
+-   **Day13** - Distress Signal
+    -   *parse multiply-embedded lists and decide order between pairs*
+    -   *determine order between all the lists*
+___
+-   **Day14** - Regolith Reservoir
+    -   *create chamber layout from corner coordinates and simulate sand flow considering infinite depth*
+    -   *simulate sand flow and determine maximum sand volume if chamber depth is not infinite*
+___
+-   **Day15** - Beacon Exclusion Zone
+    -   *based on sensor positions and Manhattan distance, determine covered "area" at given Y row*
+    -   *find the only not covered spot in 4M×4M grid*
+___
+-   **Day16** - Proboscidea Volcanium
     -   **
     -   **
 ___
--   **Day10** -  
+-   **Day17** - Pyroclastic Flow
     -   **
     -   **
 ___
--   **Day11** - 
-    -   **
-    -   **
+-   **Day18** - Boiling Boulders
+    -   *Calculate surface area of an obsidian formation in a 3D matrix*
+    -   *Calculate the same surface area without counting the inner air pockets*
 ___
--   **Day12** - 
-    -   **
-    -   **
-___
--   **Day13** -  
-    -   **
-    -   **
-___
--   **Day14** - 
-    -   **
-    -   **
-___
--   **Day15** - 
-    -   **
-    -   **
-___
--   **Day16** - 
-    -   **
-    -   **
-___
--   **Day17** -   
+-   **Day19** - Pyroclastic Flow
     -   **
     -   **
 ___

@@ -1,3 +1,10 @@
+"""
+AOC 2022 day17 - Pyroclastic Flow
+    [ https://adventofcode.com/2022/day/17 ]
+    - pt1:
+    - pt2:
+"""
+
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
@@ -7,8 +14,9 @@ input_path = os.path.abspath(os.path.realpath(input_path))
 
 
 def read_file(file_path: str) -> list[str]:
+    """ parse input txt character-by-character into wind gust directions """
     gusts = []
-    with open(file_path, "r+") as file:
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
         for line in contents:
             for cmd in line:
@@ -33,17 +41,19 @@ def move_down(stone):
 
 
 def part1(gusts: list[str]) -> None:
+    """ part 1 solution """
     for turn in range(2022):
         print(turn)
     print(f"#\t{cur_day} part1 answer is: {0}\t\t\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
-
+    """ part 2 solution """
     print(f"#\t{cur_day} part2 answer is: {0}\t\t\t\t\t#")
 
 
 def main():
+    """ day17 main """
     gusts = read_file(input_path)
     print(gusts)
     part1(gusts)

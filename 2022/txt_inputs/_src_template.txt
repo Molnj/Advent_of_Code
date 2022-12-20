@@ -1,3 +1,10 @@
+"""
+AOC 2022 day__ -
+    [ https://adventofcode.com/2022/day/xx ]
+    - pt1:
+    - pt2:
+"""
+
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
@@ -7,22 +14,23 @@ input_path = os.path.abspath(os.path.realpath(input_path))
 
 
 def read_file(file_path: str) -> list[str]:
-    with open(file_path, "r+") as file:
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
     return contents
 
 
 def part1(txt: list[str]) -> None:
-
+    """ part 1 solution """
     print(f"#\t{cur_day} part1 answer is: {0}\t\t\t\t\t#")
 
 
 def part2(txt: list[str]) -> None:
-
+    """ part 2 solution """
     print(f"#\t{cur_day} part2 answer is: {0}\t\t\t\t\t#")
 
 
 def main():
+    """ dayxx main """
     lines = read_file(input_path)
     map = xyz(lines)
     map1 = map.copy()

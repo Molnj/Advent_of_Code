@@ -1,3 +1,10 @@
+"""
+AOC 2022 day09 - Rope Bridge
+    [ https://adventofcode.com/2022/day/9 ]
+    - pt1: 5695
+    - pt2: 2434
+"""
+
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
@@ -8,7 +15,8 @@ input_path = os.path.abspath(os.path.realpath(input_path))
 
 
 def read_file(file_path: str) -> list[str]:
-    with open(file_path, "r+") as file:
+    """ parse input txt line-by-line into list of strings """
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
     return contents
 
@@ -20,13 +28,12 @@ def simulate_movement(rope: list, move: str) -> list:
         the rest = positions covered by the tail
     """
     positions = [[0, 0]]
-    prev_head_pos = [rope[0][0], rope[0][1]]
 
     move_dir = move.split(" ")[0]
     move_len = int(move.split(" ")[1])
 
-    for i in range(move_len):
-        for knot in range(0, len(rope)):
+    for _ in range(move_len):
+        for knot, __ in enumerate(rope):
             cur_knot = [rope[knot][0], rope[knot][1]]
             # move rope head
             if knot == 0:
@@ -38,18 +45,22 @@ def simulate_movement(rope: list, move: str) -> list:
                     cur_knot[1] += 1
                 elif move_dir == 'D':
                     cur_knot[1] -= 1
-                else:
-                    raise Exception(f"ERROR: Unmapped direction: {move_dir}")
             # move rope body
             else:
                 prev_knot = [rope[knot-1][0], rope[knot-1][1]]
-                if (abs(prev_knot[1] - cur_knot[1]) <= 1) and (abs(prev_knot[0] - cur_knot[0]) <= 1):
-                    pass    # no movement if previous node is within the 3×3 area - centered around current node
+                if (abs(prev_knot[1] - cur_knot[1]) <= 1) \
+                        and (abs(prev_knot[0] - cur_knot[0]) <= 1):
+                    # no movement if previous node is within the 3×3 area
+                    pass
                 else:
-                    if (prev_knot[0] - cur_knot[0]) > 0:    cur_knot[0] += 1
-                    if (prev_knot[0] - cur_knot[0]) < 0:    cur_knot[0] -= 1
-                    if (prev_knot[1] - cur_knot[1]) > 0:    cur_knot[1] += 1
-                    if (prev_knot[1] - cur_knot[1]) < 0:    cur_knot[1] -= 1
+                    if (prev_knot[0] - cur_knot[0]) > 0:
+                        cur_knot[0] += 1
+                    if (prev_knot[0] - cur_knot[0]) < 0:
+                        cur_knot[0] -= 1
+                    if (prev_knot[1] - cur_knot[1]) > 0:
+                        cur_knot[1] += 1
+                    if (prev_knot[1] - cur_knot[1]) < 0:
+                        cur_knot[1] -= 1
             rope[knot][0], rope[knot][1] = cur_knot[0], cur_knot[1]
 
         positions.append([rope[-1][0], rope[-1][1]])    # add current tail position
@@ -58,6 +69,7 @@ def simulate_movement(rope: list, move: str) -> list:
 
 
 def part1(moves: list[str], rope_len: int) -> None:
+    """ part 1 solution """
     tail_positions = []
     rope = [[0, 0] for _ in range(0, rope_len)]
     for move in moves:
@@ -69,6 +81,7 @@ def part1(moves: list[str], rope_len: int) -> None:
 
 
 def part2(moves: list[str], rope_len: int) -> None:
+    """ part 2 solution """
     tail_positions = []
     rope = [[0, 0] for _ in range(0, rope_len)]
     for move in moves:
@@ -80,6 +93,7 @@ def part2(moves: list[str], rope_len: int) -> None:
 
 
 def main():
+    """ day09 main """
     move_list = read_file(input_path)
     part1(move_list, 2)
     part2(move_list, 10)

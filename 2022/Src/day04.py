@@ -1,3 +1,10 @@
+"""
+AOC 2022 day04 - Camp Cleanup
+    [ https://adventofcode.com/2022/day/4 ]
+    - pt1: 547
+    - pt2: 843
+"""
+
 import os
 
 file_dir = os.path.dirname(os.path.realpath('__file__'))
@@ -6,12 +13,17 @@ file_name = os.path.abspath(os.path.realpath(file_name))
 
 
 def read_file(file_path: str) -> list[str]:
-    with open(file_path, "r+") as file:
+    """ parse input txt line-by-line into list of strings """
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]     # readlines(), but without "\n"
     return contents
 
 
 def expand_section(sect: str) -> set:
+    """
+        :param sect: e.g.: "3-7"
+        :return: e.g.: [3, 4, 5, 6, 7]
+    """
     full_section = set()
     start, end = sect.split("-")
     start = int(start)
@@ -23,6 +35,7 @@ def expand_section(sect: str) -> set:
 
 
 def part1(txt: list[str]) -> None:
+    """ part 1 solution """
     subset_cnt = 0
     for line in txt:
         section1, section2 = line.split(",")
@@ -34,6 +47,7 @@ def part1(txt: list[str]) -> None:
 
 
 def part2(txt: list[str]) -> None:
+    """ part 1 solution """
     intersection_cnt = 0
     for line in txt:
         section1, section2 = line.split(",")
@@ -45,6 +59,7 @@ def part2(txt: list[str]) -> None:
 
 
 def main():
+    """ day04 main """
     txt_file = read_file(file_name)
     part1(txt_file)
     part2(txt_file)

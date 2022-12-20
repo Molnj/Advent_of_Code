@@ -1,3 +1,10 @@
+"""
+AOC 2022 day13 - Distress Signal
+    [ https://adventofcode.com/2022/day/13 ]
+    - pt1: 6369
+    - pt2: 25800
+"""
+
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
@@ -7,7 +14,8 @@ input_path = os.path.abspath(os.path.realpath(input_path))
 
 
 def read_file(file_path: str) -> list[list[int]]:
-    with open(file_path, "r+") as file:
+    """ parse input list pairs """
+    with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
         pairs = []
         temp = []
@@ -21,9 +29,12 @@ def read_file(file_path: str) -> list[list[int]]:
 
 
 def compare(left: int, right: int) -> str:
+    """ comparison between two lists """
     if isinstance(left, int) and isinstance(right, int):
-        if left < right: return "ordered"
-        if left > right: return "unordered"
+        if left < right:
+            return "ordered"
+        if left > right:
+            return "unordered"
         return "equal"
     if isinstance(left, list) and isinstance(right, int):
         return compare(left, [right])
@@ -33,7 +44,7 @@ def compare(left: int, right: int) -> str:
         i = 0
         while i < len(left) and i < len(right):
             comp = compare(left[i], right[i])
-            if comp == "ordered" or comp == "unordered":
+            if comp in ("ordered", "unordered"):
                 return comp
             i += 1
         if i == len(left) and len(left) < len(right):
@@ -43,6 +54,7 @@ def compare(left: int, right: int) -> str:
 
 
 def bubble_sort(arr: list[list[int]]) -> list[list[int]]:
+    """ bubble sort (should be quick) """
     new_arr = []
     while len(arr) > 1:
         temp = [arr[0]]
@@ -60,14 +72,16 @@ def bubble_sort(arr: list[list[int]]) -> list[list[int]]:
 
 
 def part1(pairs: list[list[int]]) -> None:
+    """ part 1 solution """
     index_sum = 0
-    for idx, p in enumerate(pairs):
-        if compare(p[0], p[1]) == "ordered":
+    for idx, pair in enumerate(pairs):
+        if compare(pair[0], pair[1]) == "ordered":
             index_sum += (idx + 1)
     print(f"#\t{cur_day} part1 answer is: {index_sum}\t\t\t\t\t#")
 
 
 def part2(pairs: list[list[int]]) -> None:
+    """ part 2 solution """
     distress_signal = 1
     items = [[[2]], [[6]]]
     for pair in pairs:
@@ -84,6 +98,7 @@ def part2(pairs: list[list[int]]) -> None:
 
 
 def main():
+    """ day 13 main"""
     pairs = read_file(input_path)
     part1(pairs)
     part2(pairs)
