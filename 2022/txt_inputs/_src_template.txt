@@ -19,22 +19,21 @@ def read_file(file_path: str) -> list[str]:
     return contents
 
 
-def part1(txt: list[str]) -> None:
+def part1() -> None:
     """ part 1 solution """
-    print(f"#\t{cur_day} part1 answer is: {0}\t\t\t\t\t#")
+    val = 0
+    print(f"#\t{cur_day} part1 answer is: {val}\t\t\t\t\t#")
 
 
-def part2(txt: list[str]) -> None:
+def part2() -> None:
     """ part 2 solution """
-    print(f"#\t{cur_day} part2 answer is: {0}\t\t\t\t\t#")
+    val = 0
+    print(f"#\t{cur_day} part2 answer is: {val}\t\t\t\t\t#")
 
 
 def main():
     """ dayxx main """
     lines = read_file(input_path)
-    map = xyz(lines)
-    map1 = map.copy()
-    map2 = map.copy()
-    part1(map1)
-    #part2(map2)
+    part1()
+    #part2()
     print("#################################################")
