@@ -41,8 +41,6 @@ def part1(monkeys: list[tuple[str, str]]) -> None:
             pass
         idx += 1
 
-    print(sub_solutions.values())
-
     while monkeys:
         idx = 0
         while idx < len(monkeys):
@@ -67,8 +65,6 @@ def part1(monkeys: list[tuple[str, str]]) -> None:
                 pass
             idx += 1
 
-    print(sub_solutions["bzrn"])
-    print(sub_solutions["gvhs"])
     solution = sub_solutions["root"]
     print(f"#\t{cur_day} part1 answer is: {solution}\t\t#")
 
@@ -120,28 +116,18 @@ def part2(monkiz, min: int, max: int) -> None:
                 idx -= 1
                 # finishing up evaluation of root
                 if len(monkeys) == 0:
-                    print(name)
-                    print(sub_solutions[first])    # inversely proportional to 1st
-                    print(sub_solutions[second])
-                    print("---------------------------------", mid)
                     if sub_solutions[first] < sub_solutions[second]:
-                        print("first smol")
                         part2(monkiz, min, mid)
                     if sub_solutions[first] > sub_solutions[second]:
-                        print("first big")
-                        print(mid, max)
                         part2(monkiz, mid, max)
                     else:
-                        print("oks")
-                        print(sub_solutions["humn"])
+                        solution = sub_solutions["humn"]
+                        print(f"#\t{cur_day} part2 answer is: {solution}\t\t#")
                         exit()
             except KeyError:
                 pass
             idx += 1
-
-    solution = 1
-
-    print(f"#\t{cur_day} part2 answer is: {solution}\t\t\t\t#")
+    return -1
 
 
 def main():
