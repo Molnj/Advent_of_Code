@@ -84,4 +84,8 @@ ___
     -   *Move int data in circular buffer in order of original position by it's own value*
     -   *Same thing, but with a giant (prime) multiplier on all values*
 ___
+-   **Day21** - Monkey Math
+    -   *Recursive calculatioin of a huge equation system*
+    -   *Same thing, but with a giant (prime) multiplier on all values*
+___
 ###### MM

@@ -1,14 +1,15 @@
 """
     driver file for my aoc 2022 project
-
-    from Src import day01, day02, day03, day04, day05, day06, day07, \
-                day08, day09, day10, day11, day12, day13, day14, \
-                day15, day16, day17, day18, day19, day20, day21, \
-                day22, day23, day24, day25
 """
+
 import sys
 import time
-from src import day20
+
+from src import \
+    day01, day02, day03, day04, day05, day06, day07, \
+    day08, day09, day10, day11, day12, day13, day14, \
+    day15, day16, day17, day18, day19, day20, day21, \
+    day22, day23, day24, day25
 
 start_time = time.time()
 sys.path.insert(0, '/the/folder/path/name-package/')
@@ -42,8 +43,8 @@ if __name__ == "__main__":
     # day17.main()
     # day18.main()
     # day19.main()
-    day20.main()
-    # day21.main()
+    # day20.main()
+    day21.main()
     # day22.main()
     # day23.main()
     # day24.main()
