@@ -1,8 +1,11 @@
 """
-AOC 2022 day21 -
+AOC 2022 day21 - Monkey Math
     [ https://adventofcode.com/2022/day/21 ]
-    - pt1:
-    - pt2:
+    - pt1: 21208142603224
+    - pt2: 3882224466191
+    - lessons:
+        - don't assume things, that are not explicitly specified
+          (all divisions will be integers)
 """
 
 import os

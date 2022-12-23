@@ -3,6 +3,7 @@ AOC 2022 day__ -
     [ https://adventofcode.com/2022/day/xx ]
     - pt1:
     - pt2:
+    - lessons: ...
 """
 
 import os

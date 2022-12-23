@@ -85,7 +85,11 @@ ___
     -   *Same thing, but with a giant (prime) multiplier on all values*
 ___
 -   **Day21** - Monkey Math
-    -   *Recursive calculatioin of a huge equation system*
+    -   *Recursive calculation of a huge equation system*
     -   *Same thing, but with a giant (prime) multiplier on all values*
+___
+-   **Day22** - Monkey Map
+    -   *Find the final position in a labyrinth*
+    -   *Find the final position in a labyrinth mapped onto a cube*
 ___
 ###### MM
