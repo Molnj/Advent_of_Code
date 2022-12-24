@@ -65,19 +65,19 @@ ___
     -   *find the only not covered spot in 4M×4M grid*
 ___
 -   **Day16** - Proboscidea Volcanium
-    -   **
-    -   **
+    -   *Find best valve opening order in (weighted) graph  *
+    -   *Graph traversal with 2 pointers*
 ___
 -   **Day17** - Pyroclastic Flow
-    -   **
-    -   **
+    -   *Tetris simulation*
+    -   *Tetris simulation with 1 trillion pieces*
 ___
 -   **Day18** - Boiling Boulders
     -   *Calculate surface area of an obsidian formation in a 3D matrix*
     -   *Calculate the same surface area without counting the inner air pockets*
 ___
--   **Day19** - Pyroclastic Flow
-    -   **
+-   **Day19** - Enough Minerals
+    -   *Simulating Idle-Clicker-like game outcome*
     -   **
 ___
 -   **Day20** - Grove Positioning System
@@ -92,4 +92,16 @@ ___
     -   *Find the final position in a labyrinth*
     -   *Find the final position in a labyrinth mapped onto a cube*
 ___
+-   **Day23** - Unstable Diffusion
+    -   *Cellular Automation implementation*
+    -   *Find how many rounds are needed for the automata to stop*
+___
+-   **Day24** - Blizzard Basin
+    -   *Finding the way out of a constantly shifting maze*
+    -   **
+___
+-   **Day25** - 
+    -   **
+    -   **
+
 ###### MM

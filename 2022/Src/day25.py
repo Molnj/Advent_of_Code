@@ -1,8 +1,9 @@
 """
-AOC 2022 day__ -
-    [ https://adventofcode.com/2022/day/xx ]
+AOC 2022 day25 -
+    [ https://adventofcode.com/2022/day/25 ]
     - pt1:
     - pt2:
+    - lessons:
 """
 
 import os
@@ -32,7 +33,7 @@ def part2() -> None:
 
 
 def main():
-    """ dayxx main """
+    """ day25 main """
     lines = read_file(input_path)
     part1()
     #part2()
