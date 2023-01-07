@@ -66,7 +66,7 @@ ___
 ___
 -   Day16 - **Proboscidea Volcanium** <sub>[ VERY HARD!! ]</sub>
     -   *Find best valve opening order in (weighted) graph*
-    -   *Graph traversal with 2 pointers*
+    -   *Graph traversal with 2 pointers (elephant helper)*
 ___
 -   Day17 - **Pyroclastic Flow** <sub>[ VERY HARD ]</sub>
     -   *Tetris simulation*
@@ -78,7 +78,7 @@ ___
 ___
 -   Day19 - **Enough Minerals** <sub>[ VERY HARD!!!! ]</sub>
     -   *Simulating Idle-Clicker-like game outcome*
-    -   *-*
+    -   *Same thing, with small modifications to the initial conditions*
 ___
 -   Day20 - **Grove Positioning System** <sub>[ medium ]</sub>
     -   *Move int data in circular buffer in order of original position by it's own value*
@@ -98,10 +98,10 @@ ___
 ___
 -   Day24 - **Blizzard Basin** <sub>[ hard ]</sub>
     -   *Finding the way out of a constantly shifting maze*
-    -   *-*
+    -   *Finding the way back to the start too, and then again to the exit*
 ___
 -   Day25 - **Full of Hot Air** <sub>[ easy-medium ]</sub>
-    -   *Number conversion between decimal and [(-2) - 2] system*
+    -   *Number conversion between decimal and [-2, -1, 0, 1, 2] quinary ( base-5 / pental) system*
     -   *The hardest challenge of all: having all 49 previous stars*
 ___
 ###### Merry Christmas! 🎄
