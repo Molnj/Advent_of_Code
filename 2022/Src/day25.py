@@ -32,6 +32,8 @@ def read_file(file_path: str) -> list[str]:
 def part1(codes: list[str]) -> None:
     """ part 1 solution """
     sum_snafu = ""
+
+    # get sum_dec
     dec_nums = []
     sum_dec = 0
     for num in codes:
@@ -41,11 +43,13 @@ def part1(codes: list[str]) -> None:
         dec_nums.append(temp)
         sum_dec += temp
 
+    # sum_dec to sum_snafu (building from right to left)
     prev_remain = 0
     while sum_dec != 0 or prev_remain:
         curr_remain = sum_dec % 5 + prev_remain
         sum_snafu = {0: "0", 1: "1", 2: "2", 3: "=", 4: "-", 5: "0"}[curr_remain] + sum_snafu
         sum_dec //= 5
+        # if negative vakue was added, then carry 1 remainder to the next pentagonal place (g5^n)
         if curr_remain > 2:
             prev_remain = 1
         else:
