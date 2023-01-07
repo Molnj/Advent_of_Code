@@ -12,11 +12,11 @@ ___
     -   *Calculate resulting score of (enemy shape - player shape) pairs*
     -   *Calculate resulting score of (enemy shape - match outcome) pairs*
 ___
--   Day03 - **Rucksack Reorganization ** <sub>[ easy ]</sub>
+-   Day03 - **Rucksack Reorganization** <sub>[ easy ]</sub>
     -   *Find the one element that is present in both halves of strings*
     -   *Find the one element that is present in groups of strings of 3*
 ___
--   Day04 - **Camp Cleanup ** <sub>[ easy ]</sub>
+-   Day04 - **Camp Cleanup** <sub>[ easy ]</sub>
     -   *Find section pairs (a-b,x-z) which form subsets*
     -   *Find section pairs (a-b,x-z) which have intersections*
 ___
