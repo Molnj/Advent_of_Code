@@ -12,8 +12,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[tuple[str, str]]:
@@ -69,7 +70,7 @@ def part1(monkeys: list[tuple[str, str]]) -> None:
             idx += 1
 
     solution = sub_solutions["root"]
-    print(f"#\t{cur_day} part1 answer is: {solution}\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {solution}': <48}#")
 
 
 def part2(monkiz, min: int, max: int) -> None:
@@ -125,7 +126,7 @@ def part2(monkiz, min: int, max: int) -> None:
                         part2(monkiz, mid, max)
                     else:
                         solution = sub_solutions["humn"]
-                        print(f"#\t{cur_day} part2 answer is: {solution}\t\t#")
+                        print(f"#{f'  {cur_day} part2 answer is: {solution}': <48}#")
                         exit()
             except KeyError:
                 pass
@@ -138,4 +139,4 @@ def main():
     monkeys = read_file(input_path)
     part1(monkeys)
     part2(monkeys, 0, 3882224466192)
-    print("#################################################")
+    print("#"*50)

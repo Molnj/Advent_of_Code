@@ -7,9 +7,11 @@ AOC 2022 day03 - Rucksack Reorganization
 
 import os
 
+cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-file_name = os.path.join(file_dir, '../txt_inputs/day03.txt')
-file_name = os.path.abspath(os.path.realpath(file_name))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[str]:
@@ -35,7 +37,7 @@ def part1(txt: list[str]) -> None:
         # matching_char only finds 1st matching char, but shouldn't be more anyway
         matching_char = (str(set(comp1) & set(comp2)))[2]
         priority_sum += get_char_priority(matching_char)
-    print(f"#\tday03 part1 answer is: {priority_sum}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {priority_sum}': <48}#")
 
 
 def part2(txt: list[str]) -> None:
@@ -49,12 +51,12 @@ def part2(txt: list[str]) -> None:
                 priority_sum += get_char_priority(char)
                 break
         i += 3
-    print(f"#\tday03 part2 answer is: {priority_sum}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {priority_sum}': <48}#")
 
 
 def main():
     """ day03 main """
-    txt_file = read_file(file_name)
+    txt_file = read_file(input_path)
     part1(txt_file)
     part2(txt_file)
-    print("#################################################")
+    print("#"*50)

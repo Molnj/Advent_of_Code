@@ -9,8 +9,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 sand_source = [500, 0]
 
@@ -131,7 +132,7 @@ def part1(cave: list[list[str]]) -> None:
         for pixel in row:
             if pixel == 'O':
                 sand_corns += 1
-    print(f"#\t{cur_day} part1 answer is: {sand_corns}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {sand_corns}': <48}#")
 
 
 def part2(cave: list[list[str]]) -> None:
@@ -144,7 +145,7 @@ def part2(cave: list[list[str]]) -> None:
         for pixel in row:
             if pixel == 'O':
                 sand_corns += 1
-    print(f"#\t{cur_day} part2 answer is: {sand_corns}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {sand_corns}': <48}#")
 
 
 def main():
@@ -155,4 +156,4 @@ def main():
     cave2 = cave.copy()
     part1(cave1)
     part2(cave2)
-    print("#################################################")
+    print("#"*50)

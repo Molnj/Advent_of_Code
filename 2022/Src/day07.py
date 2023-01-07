@@ -7,9 +7,11 @@ AOC 2022 day07 - No Space Left On Device
 
 import os
 
+cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, '../txt_inputs/day07.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 dir_sizes = []
 TOTAL_SPACE = 70000000
@@ -121,7 +123,7 @@ def part1() -> None:
     for size in dir_sizes:
         if size < 100000:
             solution += size
-    print(f"#\tday07 part1 answer is: {solution}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {solution}': <48}#")
 
 
 def part2(root: Directory) -> None:
@@ -134,7 +136,7 @@ def part2(root: Directory) -> None:
         if size >= space_to_be_deleted:
             solution = size
             break
-    print(f"#\tday07 part2 answer is: {solution}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {solution}': <48}#")
 
 
 def main():
@@ -144,4 +146,4 @@ def main():
     get_dir_sizes(root)
     part1()
     part2(root)
-    print("#################################################")
+    print("#"*50)

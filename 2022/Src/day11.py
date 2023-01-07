@@ -9,8 +9,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 monkeys = []
 
@@ -57,7 +58,7 @@ def part1() -> None:
     monkey_business = 0
     for _ in range(20):
         for monke in monkeys:
-            for _ in monke.items:
+            for old in monke.items:
                 new = eval(monke.operation)
                 monke.inspect_cnt += 1
                 new = new // 3
@@ -73,7 +74,7 @@ def part1() -> None:
         businesses.sort(reverse=True)
     monkey_business = businesses[0] * businesses[1]
 
-    print(f"#\t{cur_day} part1 answer is: {monkey_business}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {monkey_business}': <48}#")
 
 
 def part2() -> None:
@@ -94,7 +95,7 @@ def part2() -> None:
     monkey_business = 0
     for _ in range(10000):
         for monke in monkeys:
-            for __ in monke.items:
+            for old in monke.items:
                 new = eval(monke.operation)
                 monke.inspect_cnt += 1
                 if new % monke.test[0] == 0:
@@ -110,7 +111,7 @@ def part2() -> None:
         businesses.append(monke.inspect_cnt)
         businesses.sort(reverse=True)
     monkey_business = businesses[0] * businesses[1]
-    print(f"#\t{cur_day} part2 answer is: {monkey_business}\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {monkey_business}': <48}#")
 
 
 def main():
@@ -119,4 +120,4 @@ def main():
     part1()
     read_file(input_path)
     part2()
-    print("#################################################")
+    print("#"*50)

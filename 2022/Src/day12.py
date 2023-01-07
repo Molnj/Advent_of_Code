@@ -9,8 +9,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 start_val = ord('S') - ord('a') + 1     # -13
 end_val = ord('E') - ord('a') + 1       # -27
@@ -128,14 +129,14 @@ def part1(grid: list[list[int]]) -> None:
     """ part 1 solution """
     starting_pos = get_starting_pos(grid, start_val)
     step_num = bfs(grid, starting_pos)
-    print(f"#\t{cur_day} part1 answer is: {step_num}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {step_num}': <48}#")
 
 
 def part2(grid: list[list[int]]) -> None:
     """ part 2 solution """
     starting_pos = get_starting_pos(grid, end_val)
     step_num = bfs_2(grid, starting_pos)
-    print(f"#\t{cur_day} part2 answer is: {step_num}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {step_num}': <48}#")
 
 
 def main():
@@ -143,4 +144,4 @@ def main():
     matrix = read_file(input_path)
     part1(matrix)
     part2(matrix)
-    print("#################################################")
+    print("#"*50)

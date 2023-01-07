@@ -9,8 +9,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[str]:
@@ -37,7 +38,7 @@ def calc_crt_pixel(elapsed_cycles: int, x_reg: int) -> str:
         pixel = '█'
     if elapsed_cycles % 40 == 0:
         # elapsed_cycles start at 1, so whitespace override is necessary at 40
-        pixel = " \t#\n#\t"
+        pixel = "    #\n#     "
     return pixel
 
 
@@ -57,12 +58,12 @@ def part1(instructions: list[str]) -> None:
             x_reg += int(instr.split(" ")[1])
             elapsed_cycles += 1
         signal_strength_sum += sig_str
-    print(f"#\t{cur_day} part1 answer is: {signal_strength_sum}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {signal_strength_sum}': <48}#")
 
 
 def part2(instructions: list[str]) -> None:
     """ part 2 solution """
-    crt_screen = "#\t"
+    crt_screen = "#     "
     elapsed_cycles = 1
     x_reg = 1
     for instr in instructions:
@@ -74,8 +75,8 @@ def part2(instructions: list[str]) -> None:
             crt_screen += calc_crt_pixel(elapsed_cycles, x_reg)
             x_reg += int(instr.split(" ")[1])
             elapsed_cycles += 1
-    print(f"#\t{cur_day} part2 answer is: 'FJUBULRZ'\t\t\t#")
-    print(crt_screen[:-3])
+    print(f"#{f'  {cur_day} part2 answer is: FJUBULRZ': <48}#")
+    print(crt_screen[:-7])  # the last 6 chars are remainders in a new line
 
 
 def main():
@@ -83,4 +84,4 @@ def main():
     instructions = read_file(input_path)
     part1(instructions)
     part2(instructions)
-    print("#################################################")
+    print("#"*50)

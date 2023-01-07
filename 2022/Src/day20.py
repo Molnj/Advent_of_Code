@@ -13,8 +13,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[tuple[int, int]]:
@@ -50,7 +51,7 @@ def part1(buf: list[tuple[int, int]]) -> None:
     idx_2000 = (index_of_zero + 2000) % len(buffer)
     idx_3000 = (index_of_zero + 3000) % len(buffer)
     coordinate_sum = buffer[idx_1000][1] + buffer[idx_2000][1] + buffer[idx_3000][1]
-    print(f"#\t{cur_day} part1 answer is: {coordinate_sum}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {coordinate_sum}': <48}#")
 
 
 def part2(buf: list[tuple[int, int]]) -> None:
@@ -85,7 +86,7 @@ def part2(buf: list[tuple[int, int]]) -> None:
     idx_2000 = (index_of_zero + 2000) % len(buffer)
     idx_3000 = (index_of_zero + 3000) % len(buffer)
     coordinate_sum = buffer[idx_1000][1] + buffer[idx_2000][1] + buffer[idx_3000][1]
-    print(f"#\t{cur_day} part2 answer is: {coordinate_sum}\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {coordinate_sum}': <48}#")
 
 
 def main():
@@ -93,4 +94,4 @@ def main():
     buffer = read_file(input_path)
     part1(buffer)
     part2(buffer)
-    print("#################################################")
+    print("#"*50)

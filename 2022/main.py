@@ -1,5 +1,5 @@
 """
-    driver file for my aoc 2022 project
+    Driver file for my AOC 2022 project
 """
 
 import sys
@@ -11,7 +11,7 @@ from src import \
     day15, day16, day17, day18, day19, day20, day21, \
     day22, day23, day24, day25
 
-start_time = time.time()
+start_time = time.time()    #   timing execution time (timeit is alternative)
 sys.path.insert(0, '/the/folder/path/name-package/')
 
 GREEN = '\033[92m'
@@ -20,10 +20,10 @@ END = '\033[0m'
 
 
 if __name__ == "__main__":
-    print("#################################################")
-    print("#" + GREEN + BOLD + "\t\t\t  ADVENT OF CODE - 2022\t\t\t\t" + END + "#")
-    print("#" + GREEN + BOLD + "\t\t\t\t Python Solution\t\t\t\t" + END + "#")
-    print("#################################################")
+    print("#"*50)
+    print("#" + GREEN + BOLD + f"{'ADVENT OF CODE - 2022': ^48}" + END + "#")
+    print("#" + GREEN + BOLD + f"{'Python Solution': ^48}" + END + "#")
+    print("#"*50)
     # day01.main()
     # day02.main()
     # day03.main()
@@ -46,10 +46,10 @@ if __name__ == "__main__":
     # day20.main()
     # day21.main()
     # day22.main()
-    day23.main()
+    # day23.main()
     # day24.main()
-    # day25.main()
+    day25.main()
     elapsed_time_s = (time.time() - start_time)
-    print("#" + GREEN + BOLD + ("\t" * 3) + "Complete execution time:" + ("\t" * 3) + END + "#")
-    print("#" + GREEN + BOLD + "\t" * 5 + f"{elapsed_time_s:.2f} s" + "\t" * 5 + END + "#")
-    print("#################################################")
+    print("#" + GREEN + BOLD + f"{'Complete execution time:': ^48}" + END + "#")
+    print("#" + GREEN + BOLD + f"{f'{elapsed_time_s:.2f} s': ^48}" + END + "#")
+    print("#"*50)

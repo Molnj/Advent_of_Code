@@ -8,10 +8,10 @@ AOC 2022 day08 - Treetop Tree House
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
-
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[str]:
@@ -88,8 +88,6 @@ def is_visible_from_outside(forest: list[list[int]], trees_row: int, trees_col: 
         if forest[row][col] >= tree_height:
             obstructed_sides += 1
             break
-
-    print(tree_height, obstructed_sides)
     if obstructed_sides >= 4:
         is_hidden = True
     return is_hidden
@@ -167,7 +165,7 @@ def part1(forest: list[list[int]]) -> None:
             tree_y += 1
         tree_y = 0
         tree_x += 1
-    print(f"#\t{cur_day} part1 answer is: {visible_tree_num}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {visible_tree_num}': <48}#")
 
 
 def part2(forest: list[list[int]]) -> None:
@@ -184,7 +182,7 @@ def part2(forest: list[list[int]]) -> None:
             tree_x += 1
         tree_x = 0
         tree_y += 1
-    print(f"#\t{cur_day} part2 answer is: {top_scenic_score}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {top_scenic_score}': <48}#")
 
 
 def main():
@@ -194,4 +192,4 @@ def main():
     # print_matrix(matrix)
     part1(matrix)
     part2(matrix)
-    print("#################################################")
+    print("#"*50)

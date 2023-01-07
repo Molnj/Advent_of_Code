@@ -6,9 +6,11 @@ AOC 2022 day05 - Supply Stacks
 
 import os
 
+cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-file_name = os.path.join(file_dir, '../txt_inputs/day05.txt')
-file_name = os.path.abspath(os.path.realpath(file_name))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 STACK_NUM = 9
 
@@ -81,7 +83,7 @@ def part1(txt: list[str]) -> None:
     stacks = create_stacks(lines)                   # create stacks
     move_crates(lines, stacks, False)               # move stack items
     result = get_top_crates(stacks)                 # get result (string of top item letters)
-    print(f"#\tday05 part1 answer is: {result}\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {result}': <48}#")
 
 
 def part2(txt: list[str]) -> None:
@@ -90,12 +92,12 @@ def part2(txt: list[str]) -> None:
     stacks = create_stacks(lines)                   # create stacks
     move_crates(lines, stacks, True)                # move stack items
     result = get_top_crates(stacks)                 # get result (string of top item letters)
-    print(f"#\tday05 part2 answer is: {result}\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {result}': <48}#")
 
 
 def main():
     """ day05 main """
-    txt_file = read_file(file_name)
+    txt_file = read_file(input_path)
     part1(txt_file)
     part2(txt_file)
-    print("#################################################")
+    print("#"*50)

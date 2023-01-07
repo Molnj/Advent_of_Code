@@ -14,8 +14,9 @@ dfs_visited = [[[False for i in range(MAX_SIZE)]
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[str]:
@@ -66,7 +67,7 @@ def DFS(layer, row, col, grid):
             dfs_visited = [[[False for i in range(MAX_SIZE)]
                             for j in range(MAX_SIZE)]
                            for k in range(MAX_SIZE)]
-            print(stack)
+            # print(stack)
             return True
 
         # if went into a wall -- stop this branch
@@ -106,7 +107,7 @@ def part1(cube: list[list[list[int]]]) -> None:
                         adj_x = x_pos + offset_x[i]
                         if cube[adj_z][adj_y][adj_x] == 0:
                             area += 1
-    print(f"#\t{cur_day} part1 answer is: {area}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {area}': <48}#")
 
 
 def part2(cube: list[list[list[int]]]) -> None:
@@ -126,7 +127,7 @@ def part2(cube: list[list[list[int]]]) -> None:
                         adj_x = x_pos + offset_x[i]
                         if DFS(adj_z, adj_y, adj_x, cube):
                             area += 1
-    print(f"#\t{cur_day} part2 answer is: {area}\t\t\t\t\t#")
+    
 
 
 def main():
@@ -135,4 +136,4 @@ def main():
     cube = create_space(coordinates)
     part1(cube)
     part2(cube)
-    print("#################################################")
+    print("#"*50)

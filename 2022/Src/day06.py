@@ -7,9 +7,11 @@ AOC 2022 day06 - Tuning Trouble
 
 import os
 
+cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-file_name = os.path.join(file_dir, '../txt_inputs/day06.txt')
-file_name = os.path.abspath(os.path.realpath(file_name))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[str]:
@@ -32,7 +34,7 @@ def part1(txt: list[str]) -> int:
         if len(sliding_window) == 4:
             break
         idx += 1
-    print(f"#\tday06 part1 answer is: {idx+1}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {idx+1}': <48}#")
 
 
 def part2(txt: list[str]) -> None:
@@ -52,12 +54,12 @@ def part2(txt: list[str]) -> None:
         if len(sliding_window) == 14:
             break
         idx += 1
-    print(f"#\tday06 part2 answer is: {idx+1}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {idx+1}': <48}#")
 
 
 def main():
     """ day06 main """
-    txt_file = read_file(file_name)
+    txt_file = read_file(input_path)
     part1(txt_file)
     part2(txt_file)
-    print("#################################################")
+    print("#"*50)

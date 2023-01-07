@@ -8,10 +8,10 @@ AOC 2022 day09 - Rope Bridge
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
-
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[str]:
@@ -77,7 +77,7 @@ def part1(moves: list[str], rope_len: int) -> None:
         for i in temp:
             if i not in tail_positions:
                 tail_positions.append(i)
-    print(f"#\t{cur_day} part1 answer is: {len(tail_positions)}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {len(tail_positions)}': <48}#")
 
 
 def part2(moves: list[str], rope_len: int) -> None:
@@ -89,7 +89,7 @@ def part2(moves: list[str], rope_len: int) -> None:
         for i in temp:
             if i not in tail_positions:
                 tail_positions.append(i)
-    print(f"#\t{cur_day} part2 answer is: {len(tail_positions)}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {len(tail_positions)}': <48}#")
 
 
 def main():
@@ -97,4 +97,4 @@ def main():
     move_list = read_file(input_path)
     part1(move_list, 2)
     part2(move_list, 10)
-    print("#################################################")
+    print("#"*50)

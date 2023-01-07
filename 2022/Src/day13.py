@@ -9,8 +9,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> list[list[int]]:
@@ -77,7 +78,7 @@ def part1(pairs: list[list[int]]) -> None:
     for idx, pair in enumerate(pairs):
         if compare(pair[0], pair[1]) == "ordered":
             index_sum += (idx + 1)
-    print(f"#\t{cur_day} part1 answer is: {index_sum}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {index_sum}': <48}#")
 
 
 def part2(pairs: list[list[int]]) -> None:
@@ -94,7 +95,7 @@ def part2(pairs: list[list[int]]) -> None:
             distress_signal *= (idx+1)
         if i == [[6]]:
             distress_signal *= (idx+1)
-    print(f"#\t{cur_day} part2 answer is: {distress_signal}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {distress_signal}': <48}#")
 
 
 def main():
@@ -102,4 +103,4 @@ def main():
     pairs = read_file(input_path)
     part1(pairs)
     part2(pairs)
-    print("#################################################")
+    print("#"*50)

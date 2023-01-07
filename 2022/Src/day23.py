@@ -11,8 +11,9 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
 def read_file(file_path: str) -> set[set[int, int]]:
@@ -104,7 +105,7 @@ def part1(elves: set[set[int, int]]) -> None:
             if (y, x) not in elves:
                 empty_ground += 1
 
-    print(f"#\t{cur_day} part1 answer is: {empty_ground}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {empty_ground}': <48}#")
 
 
 def part2(elves: set[set[int, int]]) -> None:
@@ -179,13 +180,13 @@ def part2(elves: set[set[int, int]]) -> None:
         # rotate direction list
         dir_list = dir_list[1:] + [dir_list[0]]
 
-    print(f"#\t{cur_day} part2 answer is: {num_of_turns}\t\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {num_of_turns}': <48}#")
 
 
 def main():
     """ day23 main """
     elves = read_file(input_path)
-    print(elves)
+    # print(elves)
     part1(elves)
     part2(elves)
-    print("#################################################")
+    print("#"*50)

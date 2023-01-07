@@ -13,11 +13,12 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'../txt_inputs/{cur_day}.txt')
-input_path = os.path.abspath(os.path.realpath(input_path))
+input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
+input_path = os.path.realpath(input_path)
+input_path = os.path.abspath(input_path)
 
 
-def read_file(file_path: str) -> (str, list[str]):
+def read_file(file_path: str):
     # read input txt file
     with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
@@ -152,7 +153,8 @@ def part1(field: list[str], moves: list[any]) -> None:
         facing = 3
     password = 1000 * (pos[0]+1) + 4 * (pos[1]+1) + facing
 
-    print(f"#\t{cur_day} part1 answer is: {password}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part1 answer is: {password}': <48}#")
+
 
 
 def part2(field: list[str], moves: list[any]) -> None:
@@ -352,7 +354,8 @@ def part2(field: list[str], moves: list[any]) -> None:
     if direction == [-1, 0]:
         facing = 3
     password = 1000 * (pos[0] + 1) + 4 * (pos[1] + 1) + facing
-    print(f"#\t{cur_day} part2 answer is: {password}\t\t\t\t#")
+    print(f"#{f'  {cur_day} part2 answer is: {password}': <48}#")
+
 
 
 def main():
@@ -360,4 +363,4 @@ def main():
     field, moves = read_file(input_path)
     part1(field, moves)
     part2(field, moves)
-    print("#################################################")
+    print("#"*50)
