@@ -14,8 +14,10 @@ input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
 
 
-def read_file(file_path: str) -> dict:
+def read_file(file_path: str) -> list(dict):
     """ parse input txt file """
+    adjacencies = []
+    flow_rates = {}
     with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
         for line in contents:
@@ -25,6 +27,7 @@ def read_file(file_path: str) -> dict:
 def part1() -> None:
     """ part 1 solution """
     val = 0
+    minutes = 30
     print(f"#{f'  {cur_day} part1 answer is: {val}': <48}#") 
 
 def part2() -> None:
