@@ -48,7 +48,7 @@ if __name__ == "__main__":
     # day22.main()
     # day23.main()
     # day24.main()
-    day25.main()
+    # day25.main()
     elapsed_time_s = (time.time() - start_time)
     print("#" + GREEN + BOLD + f"{'Complete execution time:': ^48}" + END + "#")
     print("#" + GREEN + BOLD + f"{f'{elapsed_time_s:.2f} s': ^48}" + END + "#")

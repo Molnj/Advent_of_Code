@@ -9,21 +9,47 @@ import os
 
 cur_day = os.path.basename(__file__)[:-3]
 file_dir = os.path.dirname(os.path.realpath('__file__'))
-input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')    # using \ as 1st char in str represents absoulte path (all before it wouldl be discarded)
+input_path = os.path.join(file_dir, f'txt_inputs_test/{cur_day}.txt')    # using \ as 1st char in str represents absoulte path (all before it wouldl be discarded)
 input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
 
 
-def read_file(file_path: str) -> list(dict):
-    """ parse input txt file """
-    adjacencies = []
-    flow_rates = {}
+def read_file(file_path: str) -> list[dict]:
+    """ parse input txt file 
+    uses BFS to create graph - deleting empty nodes and weighing edges accordingly"""
+    valves = {}
     with open(file_path, mode="r+", encoding="utf-8") as file:
         contents = [line.rstrip('\n') for line in file]
         for line in contents:
-            print(line.split())
+            valve = line.split()[1]
+            flow = int(line.split()[4].split('=')[1][:-1])
+            neighbors = [n[:2] for n in line.split()[9:]]
+            valves[valve] = [flow, neighbors]
+    
+    # BFSs for all nodes
+    dists = {}
+    for valve in valves:
+        # ignore empty nodes (except AA)
+        if valve != "AA" and valves[valve][0] == 0:
+            continue
 
+        dists[valve] = {}
+        visited = {valve}
+        queue = [(valve, 0)]
+        while queue:
+            node = queue.pop(0)
+            pos, dist = node
+            for neighbor in valves[pos][1]:
+                if neighbor in visited:
+                    continue
+                visited.add(neighbor)
+                if valves[neighbor][0] != 0:
+                    dists[valve][neighbor] = dist + 1
+                queue.append((neighbor, dist+1))
 
+    return (dists)
+
+    
 def part1() -> None:
     """ part 1 solution """
     val = 0
@@ -38,7 +64,8 @@ def part2() -> None:
 
 def main():
     """ day16 main """
-    lines = read_file(input_path)
+    graph = read_file(input_path)
+    [print(key,':',value) for key, value in graph.items()]
     part1()
     #part2()
     print("#"*50)
