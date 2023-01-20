@@ -65,7 +65,7 @@ ___
     -   *find the only not covered spot in 4M×4M grid*
 ___
 -   Day16 - **Proboscidea Volcanium** <sub>[ VERY HARD!! ]</sub>
-    -   *Find best valve opening order in (weighted) graph*
+    -   *Find best valve opening order in (weighted) graph - DFS*
     -   *Graph traversal with 2 pointers (elephant helper)*
 ___
 -   Day17 - **Pyroclastic Flow** <sub>[ VERY HARD ]</sub>
