@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="306fd276-9f1a-4baf-8510-ff68ec41b284" name="Default Changelist" comment="day04">
-      <change afterPath="$PROJECT_DIR$/2022/Src/day07.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2022/txt_inputs/day07.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PythonChallenge/challenge_03.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PythonChallenge/challenge_04.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2022/Src/day06.py" beforeDir="false" afterPath="$PROJECT_DIR$/2022/Src/day06.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2022/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/2022/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonChallenge/challenge_02.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonChallenge/challenge_02.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2022/Src/day17.py" beforeDir="false" afterPath="$PROJECT_DIR$/2022/Src/day17.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonChallenge/challenge_00.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonChallenge/challenge_01.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonChallenge/challenge_02.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonChallenge/challenge_03.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonChallenge/challenge_04.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +149,6 @@
       <list>
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.day05" />
-        <item itemvalue="Python.__main__" />
         <item itemvalue="Python.challenge_03" />
         <item itemvalue="Python.challenge_04" />
       </list>
