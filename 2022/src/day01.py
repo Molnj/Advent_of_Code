@@ -8,7 +8,7 @@ AOC 2022 day01 - Calorie Counting
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
-file_dir = os.path.dirname(os.path.realpath('__file__'))
+file_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
 input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')    # using \ as 1st char in str represents absoulte path (all before it wouldl be discarded)
 input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
