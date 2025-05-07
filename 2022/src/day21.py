@@ -11,7 +11,7 @@ AOC 2022 day21 - Monkey Math
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
-file_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+file_dir = os.path.dirname(os.path.realpath('__file__'))
 input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
 input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
@@ -127,7 +127,7 @@ def part2(monkiz, min: int, max: int) -> None:
                     else:
                         solution = sub_solutions["humn"]
                         print(f"#{f'  {cur_day} part2 answer is: {solution}': <48}#")
-                        exit()
+                        break
             except KeyError:
                 pass
             idx += 1

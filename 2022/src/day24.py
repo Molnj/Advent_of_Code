@@ -12,7 +12,7 @@ import os
 import math
 
 cur_day = os.path.basename(__file__)[:-3]
-file_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+file_dir = os.path.dirname(os.path.realpath('__file__'))
 input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')
 input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
@@ -148,7 +148,6 @@ def main():
     part2(valley, valley_states)
     print("#"*50)
 
-main()
 
 
 

@@ -8,10 +8,12 @@ AOC 2022 day16 - Proboscidea Volcanium
 import os
 
 cur_day = os.path.basename(__file__)[:-3]
-file_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+file_dir = os.path.dirname(os.path.realpath('__file__'))
 input_path = os.path.join(file_dir, f'txt_inputs_test/{cur_day}.txt')    # using \ as 1st char in str represents absoulte path (all before it wouldl be discarded)
 input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
+
+flows = set()
 
 
 def read_file(file_path: str) -> list[dict]:
@@ -25,7 +27,7 @@ def read_file(file_path: str) -> list[dict]:
             flow = int(line.split()[4].split('=')[1][:-1])
             neighbors = [n[:2] for n in line.split()[9:]]
             valves[valve] = [flow, neighbors]
-    
+        
     # BFSs for all nodes
     dists = {}
     for valve in valves:
@@ -33,7 +35,9 @@ def read_file(file_path: str) -> list[dict]:
         if valve != "AA" and valves[valve][0] == 0:
             continue
 
-        dists[valve] = {}
+        dists[valve] = []
+        dists[valve].append(valves[valve][0]    )
+        dists[valve]["flow"] = valves[valve][0]     # TODO could store "flow" better somehow
         visited = {valve}
         queue = [(valve, 0)]
         while queue:
@@ -50,30 +54,62 @@ def read_file(file_path: str) -> list[dict]:
     return (dists)
 
 
-def dfs(time, valve, bitmask):
-    if (time, valve, bitmask) in cache:
-        return cache[(time, valve, bitmask)]
-    
-    maxval = 0
-    for neighbor in dists[valve]:
-        bit = 1 << indices[neighbor]
-        if bitmask & bit:
-            continue
-        remtime = time - dists[valve][neighbor] - 1
-        if remtime <= 0:
-            continue
-        maxval = max(maxval, dfs(remtime, neighbor, bitmask | bit) + valves[neighbor] * remtime)
-        
-    cache[(time, valve, bitmask)] = maxval
-    return maxval
+def bfs(graph: dict, node: str, time: int) -> int:
+    flow = 0
+    queue = [[node, flow, time]]
+    visited = []
+    for next, dist in graph[node].items():
+        print(next)
+    while queue:
+        next_node = queue.pop(0)
+        node_ = next_node[0]
+        flow_ = next_node[1]
+        time_ = next_node[2]
+        # TODO - a mostnai flow nem jó, kell egy külön dict h mi mennyi, vagy 3 elemes listák kell legyenek a kis dict elemek
+        if node not in visited:
+            if :
+                grid[y_start][x_start] = start_val  # reset 'S' from 'a' back to 'S'
+                return distance
+            for node_y2, node_x2 in ((node_y+1, node_x), (node_y-1, node_x),
+                                     (node_y, node_x+1), (node_y, node_x-1)):
+                if 0 <= node_x2 < width and 0 <= node_y2 < height:
+                    next_square = grid[node_y2][node_x2]
+                    if next_square == end_val:
+                        next_square = ord('z')-ord('a')+1  # correct 'E' to 'z'
+                    if next_square <= grid[node_y][node_x] + 1:
+                        queue.append([(node_y2, node_x2), distance])
+    return -1
 
-    
+
+def dfs(visited, graph, node, time, flow_rate):
+    if node not in visited:
+        if time < 0:
+            flows.add(flow_rate)
+        else:
+            cur_flow = 0
+            visited.add(node)
+            for next, dist in graph[node].items():
+                print(flows)
+                if next == "flow":
+                    cur_flow = dist
+                    flow_rate += cur_flow * (time-1)  # not dist, but flow rate
+                    print(flow_rate)
+                else:
+                    if cur_flow == 0:
+                        dfs(visited, graph, next, time-dist, flow_rate)
+                    else:
+                        dfs(visited, graph, next, time-dist-1, flow_rate) 
+    else:
+        flows.add(flow_rate)           
+
+
 def part1(graph: dict) -> None:
     """ part 1 solution """
     max_flow = 0
-    time = 30
-    max_flow = dfs(graph, time)
-    
+    bfs(graph, "AA", 30)
+    #visited = set()
+    #dfs(visited, graph, "AA", 30, 0)
+    print(flows)
     print(f"#{f'  {cur_day} part1 answer is: {max_flow}': <48}#") 
 
 
@@ -81,7 +117,7 @@ def part2(graph: dict) -> None:
     """ part 2 solution """
     max_flow = 0
     time = 26
-    max_flow = dfs(graph, time)
+    max_flow = dfs(graph, "AA", time)
     print(f"#{f'  {cur_day} part2 answer is: {max_flow}': <48}#")
 
 
@@ -92,5 +128,3 @@ def main():
     part1(graph)
     #part2(graph)
     print("#"*50)
-
-main()

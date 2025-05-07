@@ -10,7 +10,7 @@ import os
 import re
 
 cur_day = os.path.basename(__file__)[:-3]
-file_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+file_dir = os.path.dirname(os.path.realpath('__file__'))
 input_path = os.path.join(file_dir, f'txt_inputs/{cur_day}.txt')    # using \ as 1st char in str represents absoulte path (all before it wouldl be discarded)
 input_path = os.path.realpath(input_path)
 input_path = os.path.abspath(input_path)
@@ -119,7 +119,7 @@ def part1(gusts: list[str], max_turns: int) -> None:
         else:
             rock = rock_tmp
 
-    visualize(chamber, max_height)
+    # visualize(chamber, max_height)
     print(f"#{f'  {cur_day} part1 answer is: {max_height}': <48}#")
 
 
@@ -132,7 +132,7 @@ def part2(gusts: list[str], max_turns: int) -> None:
     rock_cnt = 0
     turn = -1
     while rock_cnt < max_turns:
-        print(turn)
+        # print(turn)
         turn += 1
         if not rock:
             rock |= spawn_rock(rock_cnt%5, max_height)
@@ -161,12 +161,12 @@ def part2(gusts: list[str], max_turns: int) -> None:
                 init_height = sum(height_pattern[:rep_idx])
                 height = init_height + (((max_turns-rep_idx)//rep_len)*rep_val) + sum(rep_pattern[:(max_turns-rep_idx)%rep_len])
                 print(f"#{f'  {cur_day} part2 answer is: {height}': <48}#")
-                exit()
+                break
 
 
 def main():
     """ day17 main """
     gusts = read_file(input_path)
-    #part1(gusts, 2023)
+    part1(gusts, 2023)
     part2(gusts, 1_000_000_000_000)
     print("#"*50)
