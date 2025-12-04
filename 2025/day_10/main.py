@@ -1,23 +1,28 @@
-# https://adventofcode.com/2025/day/3
-
+# https://adventofcode.com/2025/day/X
 import sys
 
-def process_file(path: str):
+
+def parse_input(path: str):
     with open(path) as f:
-        for line in f:
-            pass
-    return 
+        return [line.strip() for line in f if line.strip()]
 
 
-def solve(line: str, part: int = 1) -> :
-    return
+def part1(data):
+    # TODO: implement Part 1
+    return None
 
 
-def main(path_input: str):
-    print(f"Part 1: {solve(path_input, 1)}")
-    print(f"Part 2: {solve(path_input, 2)}")
+def part2(data):
+    # TODO: implement Part 2
+    return None
+
+
+def main(path: str):
+    data = parse_input(path)
+    print(f"Part 1: {part1(data)}")
+    print(f"Part 2: {part2(data)}")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "input.txt")
+    solve(sys.argv[1] if len(sys.argv) > 1 else "input.txt")
 
