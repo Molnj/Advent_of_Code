@@ -33,7 +33,7 @@ def run_day(day_folder: Path, use_test: bool) -> tuple[str, float] | None:
         module = importlib.import_module(mod_name)
         print(f"\n--- Running {mod_name} ---")
 
-        input_file = day_folder / ("input-test" if use_test else "input")
+        input_file = day_folder / ("input-test.txt" if use_test else "input.txt")
         if not input_file.exists():
             print(f"Missing input file for {day_folder.name}, skipping.")
             return None
