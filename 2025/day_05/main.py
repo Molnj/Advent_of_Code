@@ -5,7 +5,7 @@ import sys
 def parse_input(path: str):
     with open(path) as f:
         parts = f.read().strip().split("\n\n")
-    ranges = [tuple(map(int, line.split('-'))) fpr line in parts[0].splitlines()]
+    ranges = [tuple(map(int, line.split('-'))) for line in parts[0].splitlines()]
     ids = [int(x) for x in parts[1].splitlines()]
     return ranges, ids
 
@@ -20,10 +20,8 @@ def count_fresh(ranges, ids):
     return cnt
 
 
-
 def part1(ranges, ids):
-    cnt_fresh = count_fresh(ranges, ids)
-    return cnt_frest
+    return count_fresh(ranges, ids)
 
 
 def part2(ranges, ids):
