@@ -4,25 +4,39 @@ import sys
 
 def parse_input(path: str):
     with open(path) as f:
-        return [line.strip() for line in f if line.strip()]
+        parts = f.read().strip().split("\n\n")
+    ranges = [tuple(map(int, line.split('-'))) fpr line in parts[0].splitlines()]
+    ids = [int(x) for x in parts[1].splitlines()]
+    return ranges, ids
 
 
-def part1(data):
-    # TODO: implement Part 1
-    return None
+def count_fresh(ranges, ids):
+    cnt = 0
+    for i in ids:
+        for low, high in ranges:
+            if low <= i <= high:
+                cnt += 1
+                break
+    return cnt
 
 
-def part2(data):
+
+def part1(ranges, ids):
+    cnt_fresh = count_fresh(ranges, ids)
+    return cnt_frest
+
+
+def part2(ranges, ids):
     # TODO: implement Part 2
     return None
 
 
 def main(path: str):
-    data = parse_input(path)
-    print(f"Part 1: {part1(data)}")
-    print(f"Part 2: {part2(data)}")
+    ranges, ids = parse_input(path)
+    print(f"Part 1: {part1(ranges, ids)}")
+    print(f"Part 2: {part2(ranges, ids)}")
 
 
 if __name__ == "__main__":
-    solve(sys.argv[1] if len(sys.argv) > 1 else "input.txt")
+    main(sys.argv[1] if len(sys.argv) > 1 else "input.txt")
 
